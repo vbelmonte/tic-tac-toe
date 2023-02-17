@@ -1,0 +1,72 @@
+:root {
+    --red: #E02929;
+    --orange: #D46600;
+    --yellow: #F8B200;
+    --light-yellow: #E2C27D;
+    --green: #57941A;
+    --baby-blue: #51B4D3;
+    --sky-blue: #3978B1;
+    --pink: #FA9494;
+    --gold: #8B5F00;
+    --white: #FFFFFF;
+    --black: #000000;
+}
+
+body {
+    margin: 0;
+    font-size: 16px;
+    font-family: "Roboto", "Arial", sans-serif;
+    background-color: var(--light-yellow);
+}
+
+header {
+    background-color: var(--orange);
+    display: flex;
+    padding: 0.5rem 1rem;
+}
+
+#logo {
+    flex: 1;
+}
+
+#header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#header-buttons button {
+    width: 100px;
+}
+
+button {
+    border-style: solid;
+    border-color: var(--black);
+    border-radius: 1.2rem;
+    font-family: "Roboto", "Arial", sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    box-shadow: -0.4rem 0.4rem var(--yellow);
+}
+
+.btn-lg {
+    border-width: 0.5rem;
+    padding: 1.5rem 3rem;
+}
+
+.btn-sm {
+    border-width: 0.25rem;
+    padding: 0.5rem 1rem;
+}
+
+.btn-red {
+    background-color: var(--red);
+}
+
+.btn-bby-blue {
+    background-color: var(--baby-blue);
+}
+
+.btn-pink {
+    background-color: var(--pink);
+}
