@@ -13,7 +13,7 @@
 
 </head>
 <body>
-    <div class="main-screen">
+    <div class="main-screen toggle-display">
         <header>
             <div id="logo">
                 <img src="images/tic-tac-toe-logo-sm.png">
@@ -30,14 +30,21 @@
                 <img src="images/tic-tac-toe-logo.png">
             </div>
             <div>
-                <p>Press start to play</p>
+                <p class="p-game">Press start to play</p>
             </div>
             <div>
                 <button class="btn-lg btn-pink" id="start">Start</button>
             </div>
         </div>
-    </div>
-    <div class="box box-orange" id="select-mode">
+        <div class="box box-orange" id="select-mode" style="display:none">
+            <div>
+                <p class="p-game">Select Game Mode</p>
+            </div>
+            <div>
+                <button class="btn-lg btn-pink">Single Player</button>
+                <button class="btn-lg btn-pink">2 Players</button>
+            </div>
+        </div>
     </div>
     
 </body>

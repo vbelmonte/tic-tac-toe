@@ -20,7 +20,7 @@ body {
     background-color: var(--light-yellow);
 }
 
-.main-screen {
+.toggle-display {
     display: none;
 }
 
@@ -31,24 +31,25 @@ body {
     height: 100vh;
 }
 
-#start-window {
+#start-window, #select-mode {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 3rem;
+    gap: 4rem;
 }
 
-#start-window p {
-    font-size: 1.5rem;
-}
-
-#start-window div {
+#start-window div, #select-mode div {
     display: flex;
     justify-content: center;
+    gap: 1.25rem;
 }
 
 #start {
     flex: 1;
+}
+
+#select-mode button {
+    width: 290px;
 }
 
 header {
@@ -113,4 +114,12 @@ button {
 
 .btn-pink {
     background-color: var(--pink);
+}
+
+.p-game {
+    font-size: 1.5rem;
+}
+
+p {
+    margin: 0;
 }
