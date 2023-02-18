@@ -16,7 +16,39 @@ body {
     margin: 0;
     font-size: 16px;
     font-family: "Roboto", "Arial", sans-serif;
+    font-weight: 700;
     background-color: var(--light-yellow);
+}
+
+.main-screen {
+    display: none;
+}
+
+.landing-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#start-window {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 3rem;
+}
+
+#start-window p {
+    font-size: 1.5rem;
+}
+
+#start-window div {
+    display: flex;
+    justify-content: center;
+}
+
+#start {
+    flex: 1;
 }
 
 header {
@@ -39,6 +71,13 @@ header {
     width: 100px;
 }
 
+.box {
+    background-color: var(--orange);
+    border: 0.5rem solid var(--black);
+    border-radius: 1rem;
+    padding: 2.5rem;
+}
+
 button {
     border-style: solid;
     border-color: var(--black);
@@ -51,7 +90,8 @@ button {
 
 .btn-lg {
     border-width: 0.5rem;
-    padding: 1.5rem 3rem;
+    padding: 1rem 3rem;
+    font-size: 1.5rem;
 }
 
 .btn-sm {
