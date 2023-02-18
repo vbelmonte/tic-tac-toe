@@ -72,10 +72,14 @@ header {
 }
 
 .box {
-    background-color: var(--orange);
     border: 0.5rem solid var(--black);
     border-radius: 1rem;
     padding: 2.5rem;
+}
+
+.box-orange {
+    background-color: var(--orange);
+    box-shadow: -1rem 1rem var(--gold);
 }
 
 button {
