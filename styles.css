@@ -72,6 +72,13 @@ header {
     width: 100px;
 }
 
+.info {
+    position: absolute;
+    width: 3rem;
+    right: 2rem;
+    bottom: 2rem;
+}
+
 .box {
     border: 0.5rem solid var(--black);
     border-radius: 1rem;
@@ -114,6 +121,11 @@ button {
 
 .btn-pink {
     background-color: var(--pink);
+}
+
+.btn-info {
+    fill: #F8B200;
+    filter: drop-shadow(-0.25rem 0.25rem rgb(57 120 177 / 100%));
 }
 
 .p-game {
