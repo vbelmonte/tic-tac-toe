@@ -90,6 +90,10 @@ header {
     box-shadow: -1rem 1rem var(--gold);
 }
 
+.box-blue {
+    background-color: var(--sky-blue);
+}
+
 button {
     border-style: solid;
     border-color: var(--black);
@@ -124,14 +128,89 @@ button {
 }
 
 .btn-info {
-    fill: #F8B200;
+    fill: var(--yellow);
     filter: drop-shadow(-0.25rem 0.25rem rgb(57 120 177 / 100%));
+}
+
+.btn-x {
+    width: 2rem;
+}
+
+a {
+    text-decoration: none;
+    color: var(--yellow);
 }
 
 .p-game {
     font-size: 1.5rem;
 }
 
+.p-med {
+    font-weight: 500;
+    line-height: 1.5rem;
+}
+
 p {
     margin: 0;
+}
+
+h3 {
+    font-family: "Bebas Neue", "Arial", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);;
+}
+
+.modal-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#modal-info-content {
+    padding: 1rem;
+    width: 22rem;
+}
+
+#modal-info-content .exit {
+    text-align: right;
+}
+
+#modal-info-content .bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 0 1.75rem;
+}
+
+#modal-info-content h3, #modal-info-content .modal-center {
+    text-align: center;
+}
+
+#modal-info-content ul {
+    font-weight: 500;
+    line-height: 1.5rem;
+}
+
+#modal-info-content p {
+    text-align: justify;
+}
+
+.github-icon {
+    filter: drop-shadow(-0.25rem 0.25rem rgb(0 0 0 / 1));
+    width: 3rem;
+    margin-bottom: 0.5rem;   
 }
