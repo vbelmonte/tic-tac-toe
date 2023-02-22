@@ -3,6 +3,7 @@
     --orange: #D46600;
     --yellow: #F8B200;
     --light-yellow: #E2C27D;
+    --cornsilk: #FFF8DC;
     --green: #57941A;
     --baby-blue: #51B4D3;
     --sky-blue: #3978B1;
@@ -18,11 +19,14 @@ body {
     font-family: "Roboto", "Arial", sans-serif;
     font-weight: 700;
     background-color: var(--light-yellow);
+
+    height: 100vh;
 }
 
-.toggle-display {
+#toggle-display {
     display: none;
 }
+
 
 .landing-screen {
     display: flex;
@@ -50,6 +54,12 @@ body {
 
 #select-mode button {
     width: 290px;
+}
+
+.main-screen {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 header {
@@ -94,6 +104,11 @@ header {
     background-color: var(--sky-blue);
 }
 
+.box-cornsilk {
+    background-color: var(--cornsilk);
+    box-shadow: -1rem 1rem var(--gold);
+}
+
 button {
     border-style: solid;
     border-color: var(--black);
@@ -121,6 +136,10 @@ button {
 
 .btn-bby-blue {
     background-color: var(--baby-blue);
+}
+
+.btn-green {
+    background-color: var(--green);
 }
 
 .btn-pink {
@@ -152,6 +171,11 @@ a {
 
 p {
     margin: 0;
+}
+
+#caption {
+    text-align: center;
+    font-size: 1.5rem;
 }
 
 h3 {
@@ -213,4 +237,61 @@ h3 {
     filter: drop-shadow(-0.25rem 0.25rem rgb(0 0 0 / 1));
     width: 3rem;
     margin-bottom: 0.5rem;   
+}
+
+main {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    padding: 5rem;
+}
+
+.game-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 2rem;
+    height: 40rem;
+}
+
+.ttt-grid {
+    width: 22rem;
+    height: 22rem;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.25rem;
+    background-color: var(--black);
+    height: 100%;
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--cornsilk);
+}
+
+.game-message {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.game-message div {
+    display: flex;
+    gap: 1rem;
+}
+
+.game-message button {
+    flex: 1;
+}
+
+span.game-object {
+    font-weight: 900;
+    text-transform: uppercase;
 }

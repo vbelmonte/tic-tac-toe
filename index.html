@@ -56,7 +56,7 @@
             </div>
         </div>
     </div>         
-    <div class="main-screen toggle-display">
+    <div class="main-screen">
         <header>
             <div id="logo">
                 <img src="images/tic-tac-toe-logo-sm.png">
@@ -66,8 +66,34 @@
                 <button class="btn-sm btn-red">Exit</button>
             </div>
         </header>
+        <main>
+            <div class="game-area">
+                <div class="box box-orange game-message">
+                    <p id="caption">
+                        Game over. <span class="game-object">Player 1</span> wins!
+                    </p>
+                    <div>
+                        <button class="btn-sm btn-green">Restart</button>
+                        <button class="btn-sm btn-red">Exit</button>
+                    </div>
+                </div>
+                <div class="box box-cornsilk ttt-grid">
+                    <div class="container">
+                        <div class="cell"><img src="images/o-marker.png"></div>
+                        <div class="cell"><img src="images/x-marker.png"></div>
+                        <div class="cell"><img src="images/x-marker.png"></div>
+                        <div class="cell">Cell 4</div>
+                        <div class="cell"><img src="images/o-marker.png"></div>
+                        <div class="cell">Cell 6</div>
+                        <div class="cell">Cell 7</div>
+                        <div class="cell">Cell 8</div>
+                        <div class="cell"><img src="images/o-marker.png"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
-    <div class="landing-screen">
+    <div class="landing-screen" id="toggle-display">
         <div class="box box-orange" id="start-window">
             <div>
                 <img src="images/tic-tac-toe-logo.png">
