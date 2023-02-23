@@ -193,6 +193,10 @@ button:hover {
     filter: drop-shadow(-0.25rem 0.25rem rgb(57 120 177 / 100%));
 }
 
+.btn-info:hover {
+    fill: var(--red);
+}
+
 .btn-x {
     width: 2rem;
 }
@@ -203,6 +207,10 @@ button:hover {
 a {
     text-decoration: none;
     color: var(--yellow);
+}
+
+a:hover {
+    color:var(--white);
 }
 
 #caption, h4, h3 {
@@ -325,6 +333,10 @@ main {
     justify-content: center;
     align-items: center;
     background-color: var(--cornsilk);
+}
+
+.cell:hover {
+    background-color: var(--yellow);
 }
 
 .game-message {
