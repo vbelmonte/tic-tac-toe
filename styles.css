@@ -1,0 +1,360 @@
+:root {
+    --red: #E02929;
+    --orange: #D46600;
+    --yellow: #F8B200;
+    --light-yellow: #E2C27D;
+    --cornsilk: #FFF8DC;
+    --green: #57941A;
+    --baby-blue: #51B4D3;
+    --sky-blue: #3978B1;
+    --pink: #FA9494;
+    --gold: #8B5F00;
+    --white: #FFFFFF;
+    --black: #000000;
+}
+
+body {
+    background-color: var(--light-yellow);
+    font-family: "Roboto", "Arial", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    height: 100vh;
+    margin: 0;
+}
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+
+/**** LANDING SCREEN PROPERTIES ****/
+.landing-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.main-screen, #start-window, #select-mode {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-screen {
+    height: 100vh;
+}
+
+.main-screen, #start-window, #select-mode {
+    gap: 4rem;
+}
+
+#start-window div, #select-mode div {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+}
+
+#start {
+    flex: 1;
+}
+
+#select-mode button {
+    width: 18rem;
+}
+
+
+
+/**** HEADER PROPERTIES ****/
+header {
+    background-color: var(--orange);
+    display: flex;
+    padding: 0.5rem 1rem;
+}
+
+#logo {
+    flex: 1;
+}
+
+#header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#header-buttons button {
+    width: 100px;
+}
+
+.info {
+    position: absolute;
+    width: 3rem;
+    right: 2rem;
+    bottom: 2rem;
+}
+
+
+
+/**** BOX PROPERTIES ****/
+.box {
+    border: 0.5rem solid var(--black);
+    border-radius: 1rem;
+    padding: 2.5rem;
+}
+
+.box-orange, .box-cornsilk {
+    box-shadow: -1rem 1rem var(--gold);
+}
+
+.box-orange {
+    background-color: var(--orange);
+}
+
+.box-blue {
+    background-color: var(--sky-blue);
+}
+
+.box-cornsilk {
+    background-color: var(--cornsilk);
+}
+
+
+
+/**** BUTTON PROPERTIES ****/
+button {
+    border-style: solid;
+    border-color: var(--black);
+    border-radius: 1.2rem;
+    font-family: "Roboto", "Arial", sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    box-shadow: -0.4rem 0.4rem var(--yellow);
+}
+
+button:hover {
+    background-color: var(--black);
+}
+
+.btn-lg {
+    border-width: 0.5rem;
+    padding: 1rem 3rem;
+    font-size: 1.5rem;
+}
+
+.btn-sm {
+    border-width: 0.25rem;
+    padding: 0.5rem 1rem;
+}
+
+.btn-red {
+    background-color: var(--red);
+}
+
+.btn-red:hover {
+    color: var(--red);
+}
+
+.btn-bby-blue {
+    background-color: var(--baby-blue);
+}
+
+.btn-bby-blue:hover {
+    color: var(--baby-blue);
+}
+
+.btn-green {
+    background-color: var(--green);
+}
+
+.btn-green:hover {
+    color: var(--green);
+}
+
+.btn-pink {
+    background-color: var(--pink);
+}
+
+.btn-pink:hover {
+    color: var(--pink);
+}
+
+.btn-info {
+    fill: var(--yellow);
+    filter: drop-shadow(-0.25rem 0.25rem rgb(57 120 177 / 100%));
+}
+
+.btn-info:hover {
+    fill: var(--red);
+}
+
+.btn-x {
+    width: 2rem;
+}
+
+
+
+/**** TEXT PROPERTIES ****/
+a {
+    text-decoration: none;
+    color: var(--yellow);
+}
+
+a:hover {
+    color:var(--white);
+}
+
+#caption, h4, h3 {
+    font-size: 1.5rem;
+}
+
+p, h3, h4 {
+    margin: 0;
+}
+
+p {
+    line-height: 1.5rem;
+}
+
+h3 {
+    font-family: "Bebas Neue", "Arial", sans-serif;
+    font-weight: 400;
+}
+
+#caption {
+    text-align: center;
+}
+
+
+
+/**** MODAL EXIT PROPERTIES ****/
+.modal-exit-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.modal-exit-content div {
+    display: flex;
+    gap: 1rem;
+}
+
+.modal-exit-content button {
+    width: 8rem;
+}
+
+
+
+/**** MODAL INFO PROPERTIES ****/
+.modal-info-content {
+    width: 24rem;
+}
+
+.modal-info-content .exit {
+    text-align: right;
+}
+
+.modal-info-content .bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin: 0 2rem;
+}
+
+.modal-center {
+    text-align: center;
+}
+
+.modal-info-content ul, #modal-info-content p {
+    font-weight: 500;
+    line-height: 1.5rem;
+}
+
+.modal-info-content p {
+    text-align: justify;
+}
+
+.github-icon {
+    filter: drop-shadow(-0.25rem 0.25rem rgb(0 0 0 / 1));
+    width: 3rem;
+    margin-bottom: 0.5rem;   
+}
+
+#modal-info-padding {
+    padding: 1rem;
+}
+
+
+
+/**** GAMEPLAY SCREEN PROPERTIES ****/
+main {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    padding: 5rem;
+}
+
+.game-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 2rem;
+    height: 40rem;
+}
+
+.ttt-grid {
+    width: 22rem;
+    height: 22rem;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.25rem;
+    background-color: var(--black);
+    height: 100%;
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--cornsilk);
+}
+
+.cell:hover {
+    background-color: var(--yellow);
+}
+
+.game-message {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.game-message div {
+    display: flex;
+    gap: 1rem;
+}
+
+.game-message button {
+    flex: 1;
+}
+
+span.game-object {
+    font-weight: 900;
+    text-transform: uppercase;
+}

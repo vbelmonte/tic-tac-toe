@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="info">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 btn-info">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+        </svg>
+    </div> 
+    <div class="modal" id="modal-info" style="display: none">
+        <div class="box box-blue" id="modal-info-padding">
+            <div class="modal-info-content">
+                <div class="exit">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 btn-x">
+                            <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clip-rule="evenodd" />
+                        </svg>                                  
+                    </div>
+                </div>
+                <div class="bottom">
+                    <img src="images/tic-tac-toe-logo-sm.png">
+                    <div class="modal-center">
+                        <a href="https://github.com/vbelmonte">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-github github-icon" viewBox="0 0 16 16">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                        </a>
+                        <h3>Designed and developed
+                            <br>by
+                            <br><span><a href="https://github.com/vbelmonte/tic-tac-toe">Villy Belmonte</a></span>
+                        </h3>
+                    </div>
+                    <div>
+                        <p>This project is part of <a href="https://www.theodinproject.com/lessons/node-path-javascript-tic-tac-toe">The Odin Project</a> curriculum. The purpose of this project is to demonstrate the following concepts:
+                            <ul>
+                                <li>Factory Function</li>
+                                <li>Closure</li>
+                                <li>Modular Pattern</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>         
+    <div class="main-screen" style="display: none">
+        <header>
+            <div id="logo">
+                <img src="images/tic-tac-toe-logo-sm.png">
+            </div>
+            <div id="header-buttons">
+                <button class="btn-sm btn-bby-blue">Draw</button>
+                <button class="btn-sm btn-red">Exit</button>
+            </div>
+        </header>
+        <main>
+            <div class="game-area">
+                <div class="box box-orange game-message">
+                    <h4 id="caption">
+                        Game over. <span class="game-object">Player 1</span> wins!
+                    </h4>
+                    <div>
+                        <button class="btn-sm btn-green">Restart</button>
+                        <button class="btn-sm btn-red">Exit</button>
+                    </div>
+                </div>
+                <div class="box box-cornsilk ttt-grid">
+                    <div class="container">
+                        <div class="cell"><img src="images/o-marker.png"></div>
+                        <div class="cell"><img src="images/x-marker.png"></div>
+                        <div class="cell"><img src="images/x-marker.png"></div>
+                        <div class="cell">Cell 4</div>
+                        <div class="cell"><img src="images/o-marker.png"></div>
+                        <div class="cell">Cell 6</div>
+                        <div class="cell">Cell 7</div>
+                        <div class="cell">Cell 8</div>
+                        <div class="cell"><img src="images/o-marker.png"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal" id="modal-exit" style="display: none">
+                <div class="box box-blue">
+                    <div class="modal-exit-content">
+                        <h4>Are you sure you want to exit the game?</h4>
+                        <div>
+                            <button class="btn-sm btn-green">Yes</button>
+                            <button class="btn-sm btn-red">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="landing-screen">
+        <div class="box box-orange" id="start-window">
+            <div>
+                <img src="images/tic-tac-toe-logo.png">
+            </div>
+            <div>
+                <h4>Press start to play</h4>
+            </div>
+            <div>
+                <button class="btn-lg btn-pink" id="start">Start</button>
+            </div>
+        </div>
+        <div class="box box-orange" id="select-mode" style="display:none">
+            <div>
+                <h4>Select Game Mode</h4>
+            </div>
+            <div>
+                <button class="btn-lg btn-pink">Single Player</button>
+                <button class="btn-lg btn-pink">2 Players</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
