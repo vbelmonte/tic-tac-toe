@@ -14,20 +14,31 @@
 }
 
 body {
-    margin: 0;
-    font-size: 16px;
-    font-family: "Roboto", "Arial", sans-serif;
-    font-weight: 700;
     background-color: var(--light-yellow);
-
+    font-family: "Roboto", "Arial", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
     height: 100vh;
+    margin: 0;
 }
 
-#toggle-display {
-    display: none;
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
 }
 
 
+
+/**** LANDING SCREEN PROPERTIES ****/
 .landing-screen {
     display: flex;
     justify-content: center;
@@ -35,10 +46,16 @@ body {
     height: 100vh;
 }
 
-#start-window, #select-mode {
+.main-screen, #start-window, #select-mode {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+}
+
+.main-screen {
+    height: 100vh;
+}
+
+.main-screen, #start-window, #select-mode {
     gap: 4rem;
 }
 
@@ -53,15 +70,12 @@ body {
 }
 
 #select-mode button {
-    width: 290px;
+    width: 18rem;
 }
 
-.main-screen {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
 
+
+/**** HEADER PROPERTIES ****/
 header {
     background-color: var(--orange);
     display: flex;
@@ -89,15 +103,21 @@ header {
     bottom: 2rem;
 }
 
+
+
+/**** BOX PROPERTIES ****/
 .box {
     border: 0.5rem solid var(--black);
     border-radius: 1rem;
     padding: 2.5rem;
 }
 
+.box-orange, .box-cornsilk {
+    box-shadow: -1rem 1rem var(--gold);
+}
+
 .box-orange {
     background-color: var(--orange);
-    box-shadow: -1rem 1rem var(--gold);
 }
 
 .box-blue {
@@ -106,9 +126,11 @@ header {
 
 .box-cornsilk {
     background-color: var(--cornsilk);
-    box-shadow: -1rem 1rem var(--gold);
 }
 
+
+
+/**** BUTTON PROPERTIES ****/
 button {
     border-style: solid;
     border-color: var(--black);
@@ -117,6 +139,10 @@ button {
     font-weight: 900;
     text-transform: uppercase;
     box-shadow: -0.4rem 0.4rem var(--yellow);
+}
+
+button:hover {
+    background-color: var(--black);
 }
 
 .btn-lg {
@@ -134,16 +160,32 @@ button {
     background-color: var(--red);
 }
 
+.btn-red:hover {
+    color: var(--red);
+}
+
 .btn-bby-blue {
     background-color: var(--baby-blue);
+}
+
+.btn-bby-blue:hover {
+    color: var(--baby-blue);
 }
 
 .btn-green {
     background-color: var(--green);
 }
 
+.btn-green:hover {
+    color: var(--green);
+}
+
 .btn-pink {
     background-color: var(--pink);
+}
+
+.btn-pink:hover {
+    color: var(--pink);
 }
 
 .btn-info {
@@ -155,88 +197,83 @@ button {
     width: 2rem;
 }
 
+
+
+/**** TEXT PROPERTIES ****/
 a {
     text-decoration: none;
     color: var(--yellow);
 }
 
-.p-game {
+#caption, h4, h3 {
     font-size: 1.5rem;
 }
 
-.p-med {
-    font-weight: 500;
-    line-height: 1.5rem;
-}
-
-p {
+p, h3, h4 {
     margin: 0;
 }
 
-#caption {
-    text-align: center;
-    font-size: 1.5rem;
+p {
+    line-height: 1.5rem;
 }
 
 h3 {
     font-family: "Bebas Neue", "Arial", sans-serif;
-    font-size: 1.5rem;
     font-weight: 400;
-    margin: 0;
 }
 
-h4 {
-    margin: 0;
-    font-size: 1.5rem;
-}
-
-.modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-}
-
-.modal-info {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-#modal-info-content {
-    padding: 1rem;
-    width: 22rem;
-}
-
-#modal-info-content .exit {
-    text-align: right;
-}
-
-#modal-info-content .bottom {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    margin: 0 1.75rem;
-}
-
-#modal-info-content h3, #modal-info-content .modal-center {
+#caption {
     text-align: center;
 }
 
-#modal-info-content ul {
+
+
+/**** MODAL EXIT PROPERTIES ****/
+.modal-exit-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.modal-exit-content div {
+    display: flex;
+    gap: 1rem;
+}
+
+.modal-exit-content button {
+    width: 8rem;
+}
+
+
+
+/**** MODAL INFO PROPERTIES ****/
+.modal-info-content {
+    width: 24rem;
+}
+
+.modal-info-content .exit {
+    text-align: right;
+}
+
+.modal-info-content .bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin: 0 2rem;
+}
+
+.modal-center {
+    text-align: center;
+}
+
+.modal-info-content ul, #modal-info-content p {
     font-weight: 500;
     line-height: 1.5rem;
 }
 
-#modal-info-content p {
+.modal-info-content p {
     text-align: justify;
 }
 
@@ -246,10 +283,17 @@ h4 {
     margin-bottom: 0.5rem;   
 }
 
+#modal-info-padding {
+    padding: 1rem;
+}
+
+
+
+/**** GAMEPLAY SCREEN PROPERTIES ****/
 main {
     display: flex;
-    flex: 1;
     justify-content: center;
+    flex: 1;
     padding: 5rem;
 }
 
@@ -301,20 +345,4 @@ main {
 span.game-object {
     font-weight: 900;
     text-transform: uppercase;
-}
-
-.modal-exit-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-}
-
-.modal-exit-content div {
-    display: flex;
-    gap: 1rem;
-}
-
-.modal-exit-content button {
-    width: 8rem;
 }
