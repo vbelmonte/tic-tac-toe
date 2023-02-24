@@ -96,7 +96,7 @@ header {
     width: 100px;
 }
 
-.info {
+#info {
     position: absolute;
     width: 3rem;
     right: 2rem;
