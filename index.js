@@ -61,7 +61,8 @@ function runProgram() {
     document.getElementById("two-players").addEventListener("click", gameOperation.startTwoPlayers);
     document.getElementById("info").addEventListener("click", gameOperation.toggleInfoModal);
     document.getElementsByClassName("btn-x")[0].addEventListener("click", gameOperation.toggleInfoModal);
-    document.getElementById("exit-btn").addEventListener("click", gameOperation.toggleExitModal);
+    document.getElementsByClassName("exit-btn")[0].addEventListener("click", gameOperation.toggleExitModal);
+    document.getElementsByClassName("exit-btn")[1].addEventListener("click", gameOperation.toggleExitModal);
     document.getElementsByClassName("exit-btns")[0].addEventListener("click", gameOperation.leaveGame);
     document.getElementsByClassName("exit-btns")[1].addEventListener("click", gameOperation.toggleExitModal);
 }
