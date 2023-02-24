@@ -1,4 +1,5 @@
 function runProgram() {
+
     function backEndGameMechanics() {
 
         function __openLandingScreen() {
@@ -52,11 +53,65 @@ function runProgram() {
             __openLandingScreen();
         }
     
-        return {start, startTwoPlayers, toggleInfoModal, toggleExitModal, leaveGame};
+        function restartGame() {
+            initializeGame();
+        }
+
+        function initializeGame() {
+            clearGrid();
+            gamePlay.determineWhoGoesFirst();
+        }
+
+        function clearGrid() {
+            for (let i = 0; i < gridArray.length; i++) {
+                gridArray[i].innerHTML = "";
+            }
+        }
+
+        function updateMessageBox() {
+
+        }
+
+        return {start, startTwoPlayers, toggleInfoModal, toggleExitModal, leaveGame, restartGame, initializeGame};
     }
-    
+
+    function gamePlayMechanics() {
+
+        let currentMove = null;
+
+        function determineWhoGoesFirst() {
+            //1 is Player 1, 0 is Player 2
+
+            let number = Math.round(Math.random());
+
+            if (number == 1) {
+                // Player 1 goes first
+                console.log("Player 1 goes first");
+                currentMove = number;
+            }
+            else {
+                // Player 2 goes first
+                console.log("Player 2 goes first");
+                currentMove = number;
+            }
+        }
+
+        function takeTurns() {
+            if (currentMove === 1) {
+                currentMove = 0;
+            }
+            else if (currentMove === 0) {
+                currentMove = 1;
+            }
+        }
+
+        return {determineWhoGoesFirst};
+    }
+
     const gameOperation = backEndGameMechanics();
-    
+    const gamePlay = gamePlayMechanics();
+    let gridArray = document.getElementsByClassName("cell");
+
     document.getElementById("start").addEventListener("click", gameOperation.start);
     document.getElementById("two-players").addEventListener("click", gameOperation.startTwoPlayers);
     document.getElementById("info").addEventListener("click", gameOperation.toggleInfoModal);
@@ -65,6 +120,7 @@ function runProgram() {
     document.getElementsByClassName("exit-btn")[1].addEventListener("click", gameOperation.toggleExitModal);
     document.getElementsByClassName("exit-btns")[0].addEventListener("click", gameOperation.leaveGame);
     document.getElementsByClassName("exit-btns")[1].addEventListener("click", gameOperation.toggleExitModal);
+    document.getElementById("restart").addEventListener("click", gameOperation.restartGame);
 }
 
 runProgram();
