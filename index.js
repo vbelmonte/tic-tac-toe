@@ -68,11 +68,23 @@ function runProgram() {
             }
         }
 
-        function updateMessageBox() {
-
+        function updateMessageBox(message) {
+            document.getElementById("caption").innerHTML = message;
         }
 
-        return {start, startTwoPlayers, toggleInfoModal, toggleExitModal, leaveGame, restartGame, initializeGame};
+        function turnMessage(player) {
+            document.getElementsByClassName("game-message")[0].innerHTML = `<h4 id="caption"><span id="game-object">${player}'s</span> turn.</h4>`;
+        }
+
+        function goFirstMessage(player) {
+            document.getElementsByClassName("game-message")[0].innerHTML = `<h4 id="caption"><span id="game-object">${player}</span> goes first.</h4>`;
+        }
+
+        function winnerMessage() {
+            document.getElementsByClassName("game-message")[0].innerHTML = `<h4 id="caption">Game over. `
+        }
+
+        return {start, startTwoPlayers, toggleInfoModal, toggleExitModal, leaveGame, restartGame, initializeGame, updateMessageBox, goFirstMessage, turnMessage};
     }
 
     function gamePlayMechanics() {
@@ -86,21 +98,24 @@ function runProgram() {
 
             if (number == 1) {
                 // Player 1 goes first
-                console.log("Player 1 goes first");
                 currentMove = number;
+                gameOperation.goFirstMessage("Player 1");
             }
             else {
                 // Player 2 goes first
-                console.log("Player 2 goes first");
+                gameOperation.goFirstMessage("Player 2");
                 currentMove = number;
             }
         }
 
-        function takeTurns() {
+        function __takeTurns() {
             if (currentMove === 1) {
+                gameOperation.turnMessage("Player 2");
                 currentMove = 0;
+
             }
             else if (currentMove === 0) {
+                gameOperation.turnMessage("Player 1");
                 currentMove = 1;
             }
         }
@@ -111,6 +126,14 @@ function runProgram() {
     const gameOperation = backEndGameMechanics();
     const gamePlay = gamePlayMechanics();
     let gridArray = document.getElementsByClassName("cell");
+
+    (function addCellEventListener() {
+        for (let i = 0; i < gridArray.length; i++) {
+            gridArray[i].addEventListener("click", function () {
+                console.log("click!");
+            });
+        }
+    })();
 
     document.getElementById("start").addEventListener("click", gameOperation.start);
     document.getElementById("two-players").addEventListener("click", gameOperation.startTwoPlayers);
