@@ -93,19 +93,18 @@ function runProgram() {
         }
 
         function addCellEventListener() {
-            console.log("in addCellEventListener, current move is: " + __currentMove);
             for (let i = 0; i < __gridArray.length; i++) {
                 if (__currentMove === 1) {
                     __gridArray[i].addEventListener("click", function() {
                         __gridArray[i].innerHTML = `<img src="images/x-marker.png">`;
-                        console.log("x marker");
                     });
+                    gamePlay.takeTurns();
                 }
                 else if (__currentMove === 0) {
                     __gridArray[i].addEventListener("click", function () {
                         __gridArray[i].innerHTML = `<img src="images/o-marker.png">`;
-                        console.log("o marker");
                     });
+                    gamePlay.takeTurns();
                 }
             }
         }
@@ -132,19 +131,19 @@ function runProgram() {
             console.log("currentMove: " + __currentMove);
         }
 
-        function __takeTurns() {
+        function takeTurns() {
             if (__currentMove === 1) {
                 gameOperation.turnMessage("Player 2");
                 __currentMove = 0;
 
             }
-            else if (currentMove === 0) {
+            else if (__currentMove === 0) {
                 gameOperation.turnMessage("Player 1");
                 __currentMove = 1;
             }
         }
 
-        return {determineWhoGoesFirst};
+        return {determineWhoGoesFirst, takeTurns};
     }
 
     function playerOneMechanics() {
