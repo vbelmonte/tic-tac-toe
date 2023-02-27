@@ -1,5 +1,8 @@
 function runProgram() {
 
+    let __currentMove = null;
+    let __gridArray = document.getElementsByClassName("cell");
+
     function backEndGameMechanics() {
 
         function __openLandingScreen() {
@@ -60,12 +63,17 @@ function runProgram() {
         function initializeGame() {
             clearGrid();
             gamePlay.determineWhoGoesFirst();
+            addCellEventListener();
         }
 
         function clearGrid() {
-            for (let i = 0; i < gridArray.length; i++) {
-                gridArray[i].innerHTML = "";
+            for (let i = 0; i < __gridArray.length; i++) {
+                __gridArray[i].innerHTML = "";
             }
+        }
+
+        function fillCell(marker) {
+            
         }
 
         function updateMessageBox(message) {
@@ -80,17 +88,32 @@ function runProgram() {
             document.getElementsByClassName("game-message")[0].innerHTML = `<h4 id="caption"><span id="game-object">${player}</span> goes first.</h4>`;
         }
 
-        function winnerMessage() {
-            document.getElementsByClassName("game-message")[0].innerHTML = `<h4 id="caption">Game over. `
+        function winnerMessage(winner) {
+            document.getElementsByClassName("game-message")[0].innerHTML = `<h4 id="caption">Game over. ${winner} wins!`;
+        }
+
+        function addCellEventListener() {
+            console.log("in addCellEventListener, current move is: " + __currentMove);
+            for (let i = 0; i < __gridArray.length; i++) {
+                if (__currentMove === 1) {
+                    __gridArray[i].addEventListener("click", function() {
+                        __gridArray[i].innerHTML = `<img src="images/x-marker.png">`;
+                        console.log("x marker");
+                    });
+                }
+                else if (__currentMove === 0) {
+                    __gridArray[i].addEventListener("click", function () {
+                        __gridArray[i].innerHTML = `<img src="images/o-marker.png">`;
+                        console.log("o marker");
+                    });
+                }
+            }
         }
 
         return {start, startTwoPlayers, toggleInfoModal, toggleExitModal, leaveGame, restartGame, initializeGame, updateMessageBox, goFirstMessage, turnMessage};
     }
 
     function gamePlayMechanics() {
-
-        let currentMove = null;
-
         function determineWhoGoesFirst() {
             //1 is Player 1, 0 is Player 2
 
@@ -98,42 +121,47 @@ function runProgram() {
 
             if (number == 1) {
                 // Player 1 goes first
-                currentMove = number;
+                __currentMove = number;
                 gameOperation.goFirstMessage("Player 1");
             }
             else {
                 // Player 2 goes first
+                __currentMove = number;
                 gameOperation.goFirstMessage("Player 2");
-                currentMove = number;
             }
+            console.log("currentMove: " + __currentMove);
         }
 
         function __takeTurns() {
-            if (currentMove === 1) {
+            if (__currentMove === 1) {
                 gameOperation.turnMessage("Player 2");
-                currentMove = 0;
+                __currentMove = 0;
 
             }
             else if (currentMove === 0) {
                 gameOperation.turnMessage("Player 1");
-                currentMove = 1;
+                __currentMove = 1;
             }
         }
 
         return {determineWhoGoesFirst};
     }
 
+    function playerOneMechanics() {
+        function addX() {
+
+        }
+    }
+
+    function playerTwoMechanics() {
+        function addO() {
+
+        }
+    }
+
     const gameOperation = backEndGameMechanics();
     const gamePlay = gamePlayMechanics();
-    let gridArray = document.getElementsByClassName("cell");
 
-    (function addCellEventListener() {
-        for (let i = 0; i < gridArray.length; i++) {
-            gridArray[i].addEventListener("click", function () {
-                console.log("click!");
-            });
-        }
-    })();
 
     document.getElementById("start").addEventListener("click", gameOperation.start);
     document.getElementById("two-players").addEventListener("click", gameOperation.startTwoPlayers);
