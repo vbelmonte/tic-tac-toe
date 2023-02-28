@@ -164,6 +164,7 @@ function runProgram() {
             // else if all grid cells are filled with no winner, end the game with no winner
             else if (checkFullGrid() === true) {
                 console.log("No winner.");
+                gameOperation.updateMessageBox("No winner.");
             }
 
             // else if there is no winner, keep playing and switch turns
@@ -231,7 +232,7 @@ function runProgram() {
             let fullGridFlag = true;
 
             for (let i = 0; i < __gridArray.length; i++) {
-                if (!(__gridArray[i].classList.contains("x")) || !(__gridArray[i].classList.contains("o"))) {
+                if (!(__gridArray[i].classList.contains("x")) && !(__gridArray[i].classList.contains("o"))) {
                     fullGridFlag = false;
                     break;
                 }
