@@ -81,7 +81,7 @@ function runProgram() {
         }
 
         function turnMessage(player) {
-            document.getElementsByClassName("game-message")[0].innerHTML = `<h4 id="caption"><span id="game-object">${player}'s</span> turn.</h4>`;
+            document.getElementsByClassName("game-message")[0].innerHTML = `<h4 id="caption"><span id="game-object">${player}</span>'s turn.</h4>`;
         }
 
         function goFirstMessage(player) {
@@ -94,22 +94,22 @@ function runProgram() {
 
         function addCellEventListener() {
             for (let i = 0; i < __gridArray.length; i++) {
-                if (__currentMove === 1) {
-                    __gridArray[i].addEventListener("click", function() {
+                __gridArray[i].addEventListener("click", function() {
+                    if (__currentMove === 1) {
+                        __gridArray[i].classList.add("x");
                         __gridArray[i].innerHTML = `<img src="images/x-marker.png">`;
-                    });
-                    gamePlay.takeTurns();
-                }
-                else if (__currentMove === 0) {
-                    __gridArray[i].addEventListener("click", function () {
+                        gamePlay.checkForWinner();
+                    }
+                    else if (__currentMove === 0) {
+                        __gridArray[i].classList.add("o");
                         __gridArray[i].innerHTML = `<img src="images/o-marker.png">`;
-                    });
-                    gamePlay.takeTurns();
-                }
+                        gamePlay.checkForWinner();
+                    }
+                });
             }
         }
 
-        return {start, startTwoPlayers, toggleInfoModal, toggleExitModal, leaveGame, restartGame, initializeGame, updateMessageBox, goFirstMessage, turnMessage};
+        return {start, startTwoPlayers, toggleInfoModal, toggleExitModal, leaveGame, restartGame, initializeGame, updateMessageBox, goFirstMessage, turnMessage, winnerMessage};
     }
 
     function gamePlayMechanics() {
@@ -143,7 +143,103 @@ function runProgram() {
             }
         }
 
-        return {determineWhoGoesFirst, takeTurns};
+        function checkForWinner() {
+            // run the winnerAlgorithms
+            let xWinner = winnerAlgorithms("x");
+            let oWinner = winnerAlgorithms("o");
+
+            // if winnerAlgorithm checks off, there is a winner and we end the game
+            if (xWinner === true || oWinner === true) {
+                if (xWinner === true) {
+                    console.log("Player 1 wins!");
+                    gameOperation.winnerMessage("Player 1");
+                }
+                else {
+                    console.log("Player 2 wins!");
+                    gameOperation.winnerMessage("Player 2");
+                }
+
+            }
+
+            // else if all grid cells are filled with no winner, end the game with no winner
+            else if (checkFullGrid() === true) {
+                console.log("No winner.");
+            }
+
+            // else if there is no winner, keep playing and switch turns
+            else {
+                takeTurns();
+            }
+
+        }
+
+        function winnerAlgorithms(player) {
+            // if gridArray pattern 1 exists, winner   
+            if (__gridArray[0].classList.contains(player) && __gridArray[1].classList.contains(player) && __gridArray[2].classList.contains(player)) {
+                // end game, declare player winner
+                return true;
+            }
+
+            // else if gridArray pattern 2 exists, winner
+            else if (__gridArray[3].classList.contains(player) && __gridArray[4].classList.contains(player) && __gridArray[5].classList.contains(player)) {
+                // end game, declare player winner
+                return true;
+            }
+
+            // else if gridArray pattern 3 exists, winner
+            else if (__gridArray[6].classList.contains(player) && __gridArray[7].classList.contains(player) && __gridArray[8].classList.contains(player)) {
+                // end game, declare player winner
+                return true;
+            }
+
+            // else if gridArray pattern 4 exists, winner
+            else if (__gridArray[0].classList.contains(player) && __gridArray[4].classList.contains(player) && __gridArray[8].classList.contains(player)) {
+                // end game, declare player winner
+                return true;
+            }
+
+            // else if gridArray pattern 5 exists, winner
+            else if (__gridArray[2].classList.contains(player) && __gridArray[4].classList.contains(player) && __gridArray[6].classList.contains(player)) {
+                // end game, declare player winner
+                return true;
+            }
+
+            // else if gridArray pattern 6 exists, winner
+            else if (__gridArray[0].classList.contains(player) && __gridArray[3].classList.contains(player) && __gridArray[6].classList.contains(player)) {
+                // end game, declare player winner
+                return true;
+            }
+
+            // else if gridArray pattern 7 exists, winner
+            else if (__gridArray[1].classList.contains(player) && __gridArray[4].classList.contains(player) && __gridArray[7].classList.contains(player)) {
+                // end game, declare player winner
+                return true;
+            }
+
+            // else if gridArray pattern 8 exists, winner
+            else if (__gridArray[2].classList.contains(player) && __gridArray[5].classList.contains(player) && __gridArray[8].classList.contains(player)) {
+                // end game, declare player winner
+                return true;
+            }
+
+            else {
+                return false;
+            }
+        }
+
+        function checkFullGrid() {
+            let fullGridFlag = true;
+
+            for (let i = 0; i < __gridArray.length; i++) {
+                if (!(__gridArray[i].classList.contains("x")) || !(__gridArray[i].classList.contains("o"))) {
+                    fullGridFlag = false;
+                    break;
+                }
+            }
+            return fullGridFlag;
+        }
+
+        return {determineWhoGoesFirst, takeTurns, checkForWinner};
     }
 
     function playerOneMechanics() {
