@@ -96,24 +96,22 @@ function runProgram() {
             for (let i = 0; i < __gridArray.length; i++) {
                 __gridArray[i].addEventListener("click", function() {
                     if (__currentMove === 1) {
-                        if (!(__gridArray[i].classList.contains("x")) && !(__gridArray[i].classList.contains("o"))) {
-                            __gridArray[i].classList.add("x");
-                            __gridArray[i].innerHTML = `<img src="images/x-marker.png">`;
-                            gamePlay.checkForWinner();
-                        }
+                        playerOne.addX(i);
                     }
                     else if (__currentMove === 0) {
-                        if (!(__gridArray[i].classList.contains("x")) && !(__gridArray[i].classList.contains("o"))) {
-                            __gridArray[i].classList.add("o");
-                            __gridArray[i].innerHTML = `<img src="images/o-marker.png">`;
-                            gamePlay.checkForWinner();
-                        }
+                        playerTwo.addO(i);
                     }
                 });
             }
         }
 
-        return {start, startTwoPlayers, toggleInfoModal, toggleExitModal, leaveGame, restartGame, initializeGame, updateMessageBox, goFirstMessage, turnMessage, winnerMessage};
+        function disableGrid() {
+            for (let i = 0; i < __gridArray.length; i++) {
+                /*__gridArray[i].removeEventListener();*/
+            }
+        }
+
+        return {start, startTwoPlayers, toggleInfoModal, toggleExitModal, leaveGame, restartGame, initializeGame, updateMessageBox, goFirstMessage, turnMessage, winnerMessage, disableGrid};
     }
 
     function gamePlayMechanics() {
@@ -162,7 +160,7 @@ function runProgram() {
                     console.log("Player 2 wins!");
                     gameOperation.winnerMessage("Player 2");
                 }
-
+                gameOperation.disableGrid();
             }
 
             // else if all grid cells are filled with no winner, end the game with no winner
@@ -248,19 +246,34 @@ function runProgram() {
     }
 
     function playerOneMechanics() {
-        function addX() {
 
+        function addX(i) {
+            if (!(__gridArray[i].classList.contains("x")) && !(__gridArray[i].classList.contains("o"))) {
+                __gridArray[i].classList.add("x");
+                __gridArray[i].innerHTML = `<img src="images/x-marker.png">`;
+                gamePlay.checkForWinner();
+            }
         }
+        
+        return {addX};
     }
 
     function playerTwoMechanics() {
-        function addO() {
-
+        function addO(i) {
+            if (!(__gridArray[i].classList.contains("x")) && !(__gridArray[i].classList.contains("o"))) {
+                __gridArray[i].classList.add("o");
+                __gridArray[i].innerHTML = `<img src="images/o-marker.png">`;
+                gamePlay.checkForWinner();
+            }
         }
+
+        return {addO};
     }
 
     const gameOperation = backEndGameMechanics();
     const gamePlay = gamePlayMechanics();
+    const playerOne = playerOneMechanics();
+    const playerTwo = playerTwoMechanics();
 
 
     document.getElementById("start").addEventListener("click", gameOperation.start);
