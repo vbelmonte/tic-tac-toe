@@ -96,14 +96,18 @@ function runProgram() {
             for (let i = 0; i < __gridArray.length; i++) {
                 __gridArray[i].addEventListener("click", function() {
                     if (__currentMove === 1) {
-                        __gridArray[i].classList.add("x");
-                        __gridArray[i].innerHTML = `<img src="images/x-marker.png">`;
-                        gamePlay.checkForWinner();
+                        if (!(__gridArray[i].classList.contains("x")) && !(__gridArray[i].classList.contains("o"))) {
+                            __gridArray[i].classList.add("x");
+                            __gridArray[i].innerHTML = `<img src="images/x-marker.png">`;
+                            gamePlay.checkForWinner();
+                        }
                     }
                     else if (__currentMove === 0) {
-                        __gridArray[i].classList.add("o");
-                        __gridArray[i].innerHTML = `<img src="images/o-marker.png">`;
-                        gamePlay.checkForWinner();
+                        if (!(__gridArray[i].classList.contains("x")) && !(__gridArray[i].classList.contains("o"))) {
+                            __gridArray[i].classList.add("o");
+                            __gridArray[i].innerHTML = `<img src="images/o-marker.png">`;
+                            gamePlay.checkForWinner();
+                        }
                     }
                 });
             }
