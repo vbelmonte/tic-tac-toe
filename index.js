@@ -94,7 +94,15 @@ function runProgram() {
         }
 
         function winnerMessage(winner) {
-            document.getElementsByClassName("game-message")[0].innerHTML = `<h4 id="caption">Game over. ${winner} wins!`;
+            document.getElementsByClassName("game-message")[0].innerHTML = `<h4 id="caption">Game over. ${winner} wins!</h4>` + __addExitButtons();
+            document.getElementById("restart").addEventListener("click", gameOperation.restartGame);
+            document.getElementsByClassName("exit-btn")[1].addEventListener("click", gameOperation.toggleExitModal);
+        }
+
+        function noWinnerMessage() {
+            document.getElementsByClassName("game-message")[0].innerHTML = `<h4 id="caption">No winner.</h4>` + __addExitButtons();
+            document.getElementById("restart").addEventListener("click", gameOperation.restartGame);
+            document.getElementsByClassName("exit-btn")[1].addEventListener("click", gameOperation.toggleExitModal);
         }
 
         function __addCellEventListener(cell) { 
@@ -120,7 +128,14 @@ function runProgram() {
             }
         }
 
-        return {start, startTwoPlayers, toggleInfoModal, toggleExitModal, leaveGame, restartGame, updateMessageBox, goFirstMessage, turnMessage, winnerMessage, endGame};
+        function __addExitButtons() {
+            return `<div id="gameover-btns">
+            <button class="btn-sm btn-green" id="restart">Restart</button>
+            <button class="btn-sm btn-red exit-btn">Exit</button>
+            </div>`;
+        }
+
+        return {start, startTwoPlayers, toggleInfoModal, toggleExitModal, leaveGame, restartGame, updateMessageBox, goFirstMessage, turnMessage, winnerMessage, noWinnerMessage, endGame};
     }
 
     function gamePlayMechanics() {
@@ -174,8 +189,8 @@ function runProgram() {
 
             // else if all grid cells are filled with no winner, end the game with no winner
             else if (__checkFullGrid() === true) {
-                console.log("No winner.");
-                gameOperation.updateMessageBox("No winner.");
+                gameOperation.noWinnerMessage();
+
             }
 
             // else if there is no winner, keep playing and switch turns
