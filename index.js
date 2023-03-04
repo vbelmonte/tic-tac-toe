@@ -75,6 +75,9 @@ function runProgram() {
         function __clearGrid() {
             for (let i = 0; i < __gridArray.length; i++) {
                 __gridArray[i].innerHTML = "";
+                __gridArray[i].classList.remove("x");
+                __gridArray[i].classList.remove("o");
+                __gridArray[i].classList.remove("end");
             }
         }
 
