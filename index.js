@@ -26,6 +26,8 @@ function runProgram() {
             document.getElementById("select-mode").style.display = "none";
             document.getElementsByClassName("landing-screen")[0].style.display = "none";
             document.getElementsByClassName("main-screen")[0].style.display = "flex";
+
+            __initializeGame();
         }
 
         function toggleInfoModal() {
@@ -57,23 +59,23 @@ function runProgram() {
         }
     
         function restartGame() {
-            initializeGame();
+            __initializeGame();
         }
 
-        function initializeGame() {
-            clearGrid();
+        function __initializeGame() {
+            __clearGrid();
             gamePlay.determineWhoGoesFirst();
-            addCellEventListener();
+            __setUpGrid();
         }
 
-        function clearGrid() {
+        function endGame() {
+            __disableGrid();
+        }
+
+        function __clearGrid() {
             for (let i = 0; i < __gridArray.length; i++) {
                 __gridArray[i].innerHTML = "";
             }
-        }
-
-        function fillCell(marker) {
-            
         }
 
         function updateMessageBox(message) {
@@ -92,26 +94,30 @@ function runProgram() {
             document.getElementsByClassName("game-message")[0].innerHTML = `<h4 id="caption">Game over. ${winner} wins!`;
         }
 
-        function addCellEventListener() {
+        function __addCellEventListener(cell) { 
+            cell.addEventListener("click", function() {
+                if (__currentMove === 1) {
+                    playerOne.addX(cell);
+                }
+                else if (__currentMove === 0) {
+                    playerTwo.addO(cell);
+                }
+            });
+        }
+
+        function __disableGrid() {
             for (let i = 0; i < __gridArray.length; i++) {
-                __gridArray[i].addEventListener("click", function() {
-                    if (__currentMove === 1) {
-                        playerOne.addX(i);
-                    }
-                    else if (__currentMove === 0) {
-                        playerTwo.addO(i);
-                    }
-                });
+                __gridArray[i].classList.add("end");
             }
         }
 
-        function disableGrid() {
+        function __setUpGrid() {
             for (let i = 0; i < __gridArray.length; i++) {
-                /*__gridArray[i].removeEventListener();*/
+                __addCellEventListener(__gridArray[i]);
             }
         }
 
-        return {start, startTwoPlayers, toggleInfoModal, toggleExitModal, leaveGame, restartGame, initializeGame, updateMessageBox, goFirstMessage, turnMessage, winnerMessage, disableGrid};
+        return {start, startTwoPlayers, toggleInfoModal, toggleExitModal, leaveGame, restartGame, updateMessageBox, goFirstMessage, turnMessage, winnerMessage, endGame};
     }
 
     function gamePlayMechanics() {
@@ -133,7 +139,7 @@ function runProgram() {
             console.log("currentMove: " + __currentMove);
         }
 
-        function takeTurns() {
+        function __takeTurns() {
             if (__currentMove === 1) {
                 gameOperation.turnMessage("Player 2");
                 __currentMove = 0;
@@ -147,8 +153,8 @@ function runProgram() {
 
         function checkForWinner() {
             // run the winnerAlgorithms
-            let xWinner = winnerAlgorithms("x");
-            let oWinner = winnerAlgorithms("o");
+            let xWinner = __winnerAlgorithms("x");
+            let oWinner = __winnerAlgorithms("o");
 
             // if winnerAlgorithm checks off, there is a winner and we end the game
             if (xWinner === true || oWinner === true) {
@@ -160,23 +166,22 @@ function runProgram() {
                     console.log("Player 2 wins!");
                     gameOperation.winnerMessage("Player 2");
                 }
-                gameOperation.disableGrid();
+                gameOperation.endGame();
             }
 
             // else if all grid cells are filled with no winner, end the game with no winner
-            else if (checkFullGrid() === true) {
+            else if (__checkFullGrid() === true) {
                 console.log("No winner.");
                 gameOperation.updateMessageBox("No winner.");
             }
 
             // else if there is no winner, keep playing and switch turns
             else {
-                takeTurns();
+                __takeTurns();
             }
-
         }
 
-        function winnerAlgorithms(player) {
+        function __winnerAlgorithms(player) {
             // if gridArray pattern 1 exists, winner   
             if (__gridArray[0].classList.contains(player) && __gridArray[1].classList.contains(player) && __gridArray[2].classList.contains(player)) {
                 // end game, declare player winner
@@ -230,7 +235,7 @@ function runProgram() {
             }
         }
 
-        function checkFullGrid() {
+        function __checkFullGrid() {
             let fullGridFlag = true;
 
             for (let i = 0; i < __gridArray.length; i++) {
@@ -242,15 +247,14 @@ function runProgram() {
             return fullGridFlag;
         }
 
-        return {determineWhoGoesFirst, takeTurns, checkForWinner};
+        return {determineWhoGoesFirst, checkForWinner};
     }
 
     function playerOneMechanics() {
-
-        function addX(i) {
-            if (!(__gridArray[i].classList.contains("x")) && !(__gridArray[i].classList.contains("o"))) {
-                __gridArray[i].classList.add("x");
-                __gridArray[i].innerHTML = `<img src="images/x-marker.png">`;
+        function addX(cell) {
+            if (!(cell.classList.contains("x")) && !(cell.classList.contains("o")) && !(cell.classList.contains("end"))) {
+                cell.classList.add("x");
+                cell.innerHTML = `<img src="images/x-marker.png">`;
                 gamePlay.checkForWinner();
             }
         }
@@ -259,10 +263,10 @@ function runProgram() {
     }
 
     function playerTwoMechanics() {
-        function addO(i) {
-            if (!(__gridArray[i].classList.contains("x")) && !(__gridArray[i].classList.contains("o"))) {
-                __gridArray[i].classList.add("o");
-                __gridArray[i].innerHTML = `<img src="images/o-marker.png">`;
+        function addO(cell) {
+            if (!(cell.classList.contains("x")) && !(cell.classList.contains("o")) && !(cell.classList.contains("end"))) {
+                cell.classList.add("o");
+                cell.innerHTML = `<img src="images/o-marker.png">`;
                 gamePlay.checkForWinner();
             }
         }
