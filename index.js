@@ -16,6 +16,14 @@ function runProgram() {
             let gameScreen = document.getElementsByClassName("main-screen")[0];
             gameScreen.style.display = "none";
         }
+
+        function __hideHeaderButtons() {
+            document.getElementById("header-buttons").style.display = "none";
+        }
+
+        function __showHeaderButtons() {
+            document.getElementById("header-buttons").style.display = "flex";
+        }
         
         function start() {
             document.getElementById("start-window").style.display = "none";
@@ -66,10 +74,12 @@ function runProgram() {
             __clearGrid();
             gamePlay.determineWhoGoesFirst();
             __setUpGrid();
+            __showHeaderButtons();
         }
 
         function endGame() {
             __disableGrid();
+            __hideHeaderButtons();
         }
 
         function __clearGrid() {
