@@ -96,7 +96,7 @@ header {
     width: 100px;
 }
 
-.info {
+#info {
     position: absolute;
     width: 3rem;
     right: 2rem;
@@ -143,6 +143,11 @@ button {
 
 button:hover {
     background-color: var(--black);
+}
+
+button:active {
+    box-shadow: -0.2rem 0.2rem var(--yellow);
+    transform: translateX(-0.2rem) translateY(0.2rem);
 }
 
 .btn-lg {
@@ -195,6 +200,11 @@ button:hover {
 
 .btn-info:hover {
     fill: var(--red);
+}
+
+.btn-info:active {
+    filter: drop-shadow(-0.1rem 0.1rem rgb(57 120 177 / 100%));
+    transform: translateX(-0.15rem) translateY(0.15rem);
 }
 
 .btn-x {
@@ -354,7 +364,7 @@ main {
     flex: 1;
 }
 
-span.game-object {
+span#game-object {
     font-weight: 900;
     text-transform: uppercase;
 }

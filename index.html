@@ -13,7 +13,7 @@
 
 </head>
 <body>
-    <div class="info">
+    <div id="info">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 btn-info">
             <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
         </svg>
@@ -60,32 +60,31 @@
                 <img src="images/tic-tac-toe-logo-sm.png">
             </div>
             <div id="header-buttons">
-                <button class="btn-sm btn-bby-blue">Draw</button>
-                <button class="btn-sm btn-red">Exit</button>
+                <button class="btn-sm btn-red exit-btn">Exit</button>
             </div>
         </header>
         <main>
             <div class="game-area">
                 <div class="box box-orange game-message">
                     <h4 id="caption">
-                        Game over. <span class="game-object">Player 1</span> wins!
+                        Game over. <span id="game-object">Player 1</span> wins!
                     </h4>
-                    <div>
-                        <button class="btn-sm btn-green">Restart</button>
-                        <button class="btn-sm btn-red">Exit</button>
+                    <div id="gameover-btns">
+                        <button class="btn-sm btn-green" id="restart">Restart</button>
+                        <button class="btn-sm btn-red exit-btn">Exit</button>
                     </div>
                 </div>
                 <div class="box box-cornsilk ttt-grid">
                     <div class="container">
-                        <div class="cell"><img src="images/o-marker.png"></div>
-                        <div class="cell"><img src="images/x-marker.png"></div>
-                        <div class="cell"><img src="images/x-marker.png"></div>
-                        <div class="cell">Cell 4</div>
-                        <div class="cell"><img src="images/o-marker.png"></div>
-                        <div class="cell">Cell 6</div>
-                        <div class="cell">Cell 7</div>
-                        <div class="cell">Cell 8</div>
-                        <div class="cell"><img src="images/o-marker.png"></div>
+                        <div class="cell" id="c-1"><img src="images/o-marker.png"></div>
+                        <div class="cell" id="c-2"><img src="images/x-marker.png"></div>
+                        <div class="cell" id="c-3"><img src="images/x-marker.png"></div>
+                        <div class="cell" id="c-4">Cell 4</div>
+                        <div class="cell" id="c-5"><img src="images/o-marker.png"></div>
+                        <div class="cell" id="c-6">Cell 6</div>
+                        <div class="cell" id="c-7">Cell 7</div>
+                        <div class="cell" id="c-8">Cell 8</div>
+                        <div class="cell" id="c-9"><img src="images/o-marker.png"></div>
                     </div>
                 </div>
             </div>
@@ -94,8 +93,8 @@
                     <div class="modal-exit-content">
                         <h4>Are you sure you want to exit the game?</h4>
                         <div>
-                            <button class="btn-sm btn-green">Yes</button>
-                            <button class="btn-sm btn-red">No</button>
+                            <button class="btn-sm btn-green exit-btns" id="exit">Yes</button>
+                            <button class="btn-sm btn-red exit-btns" id="stay">No</button>
                         </div>
                     </div>
                 </div>
@@ -119,10 +118,12 @@
                 <h4>Select Game Mode</h4>
             </div>
             <div>
-                <button class="btn-lg btn-pink">Single Player</button>
-                <button class="btn-lg btn-pink">2 Players</button>
+                <button class="btn-lg btn-pink" id="single-player">Single Player</button>
+                <button class="btn-lg btn-pink" id="two-players">2 Players</button>
             </div>
         </div>
     </div>
+
+    <script src="index.js"></script>
 </body>
 </html>
