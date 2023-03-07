@@ -18,7 +18,7 @@ body {
     font-family: "Roboto", "Arial", sans-serif;
     font-size: 16px;
     font-weight: 700;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
 }
 
@@ -36,6 +36,12 @@ body {
     background-color: rgba(0,0,0,0.4);
 }
 
+#container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 
 
 /**** LANDING SCREEN PROPERTIES ****/
@@ -43,7 +49,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    flex-grow: 1;
 }
 
 .main-screen, #start-window, #select-mode {
@@ -52,7 +58,8 @@ body {
 }
 
 .main-screen {
-    height: 100vh;
+    flex: 1;
+    /*height: 100vh;*/
 }
 
 .main-screen, #start-window, #select-mode {
@@ -97,10 +104,8 @@ header {
 }
 
 #info {
-    position: absolute;
-    width: 3rem;
-    right: 2rem;
-    bottom: 2rem;
+    /*width: 3rem;*/
+    padding: 1rem;
 }
 
 
@@ -194,8 +199,12 @@ button:active {
 }
 
 .btn-info {
+    display: block;
+    width: 3rem;
+    height: 3rem;
     fill: var(--yellow);
     filter: drop-shadow(-0.25rem 0.25rem rgb(57 120 177 / 100%));
+    float: right;
 }
 
 .btn-info:hover {
@@ -312,7 +321,7 @@ main {
     display: flex;
     justify-content: center;
     flex: 1;
-    padding: 5rem;
+    padding: 0 4rem;
 }
 
 .game-area {
