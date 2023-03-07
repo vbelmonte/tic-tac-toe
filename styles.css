@@ -50,6 +50,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-grow: 1;
+    padding: 2rem;
 }
 
 .main-screen, #start-window, #select-mode {
@@ -62,6 +63,7 @@ body {
 }
 
 #start-window, #select-mode {
+    text-align: center;
     gap: 4rem;
 }
 
@@ -379,6 +381,7 @@ span#game-object {
 }
 
 
+
 @media only screen and (max-width: 768px) {
     #select-mode button {
         width: 9rem;
@@ -409,5 +412,58 @@ span#game-object {
 
     .cell img {
         width: 4rem;
+    }
+
+    main {
+        padding: 2rem;
+    }
+}
+
+
+
+@media only screen and (max-width: 425px) {
+    #start-window img {
+        width: 12rem;
+    }
+
+    #modal-info-padding {
+        padding: 0.5rem;
+    }
+
+    .modal-info-content {
+        width: auto;
+    }
+
+    .modal-info-content p {
+        line-height: 1.25rem;
+    }
+
+    #select-mode div {
+        flex-direction: column;
+    }
+
+    #select-mode button {
+        width: auto;
+    }
+
+    .ttt-grid {
+        width: 14rem;
+        height: 14rem;
+    }
+
+    .box {
+        padding: 1.75rem;
+    }
+
+    .modal-exit-content {
+        align-items: normal;
+    }
+
+    .modal-exit-content div {
+        flex-direction: column;
+    }
+
+    .modal-exit-content button {
+        width: auto;
     }
 }
