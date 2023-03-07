@@ -59,10 +59,9 @@ body {
 
 .main-screen {
     flex: 1;
-    /*height: 100vh;*/
 }
 
-.main-screen, #start-window, #select-mode {
+#start-window, #select-mode {
     gap: 4rem;
 }
 
@@ -261,6 +260,7 @@ h3 {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+    text-align: center;
 }
 
 .modal-exit-content div {
@@ -321,7 +321,7 @@ main {
     display: flex;
     justify-content: center;
     flex: 1;
-    padding: 0 4rem;
+    padding: 4rem;
 }
 
 .game-area {
@@ -376,4 +376,38 @@ main {
 span#game-object {
     font-weight: 900;
     text-transform: uppercase;
+}
+
+
+@media only screen and (max-width: 768px) {
+    #select-mode button {
+        width: 9rem;
+    }
+
+    .btn-lg {
+        border-width: 0.5rem;
+        padding: 0.5rem 1.5rem;
+        font-size: 0.75rem;
+    }
+
+    .main-screen, #start-window, #select-mode {
+        gap: 2rem;
+    }
+
+    .ttt-grid {
+        width: 16rem;
+        height: 16rem;
+    }
+
+    .game-area {
+        height: fit-content;
+    }
+
+    #modal-exit .box {
+        margin: 2rem;
+    }
+
+    .cell img {
+        width: 4rem;
+    }
 }
