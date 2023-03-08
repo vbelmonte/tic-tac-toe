@@ -11,6 +11,8 @@
     --pink: #FA9494;
     --gold: #8B5F00;
     --white: #FFFFFF;
+    --gray: #9b9b9b;
+    --darkgray: #585858;
     --black: #000000;
 }
 
@@ -155,6 +157,14 @@ button:hover {
 button:active {
     box-shadow: -0.2rem 0.2rem var(--yellow);
     transform: translateX(-0.2rem) translateY(0.2rem);
+}
+
+button:disabled {
+    pointer-events: none;
+    background-color: var(--gray);
+    border-color: var(--darkgray);
+    box-shadow: -0.4rem 0.4rem var(--gray);
+    
 }
 
 .btn-lg {
