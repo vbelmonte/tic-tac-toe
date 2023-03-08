@@ -84,7 +84,6 @@ body {
     width: 18rem;
 }
 
-
 input {
     background-color: var(--cornsilk);
     font-family: "Roboto", "Arial", sans-serif;
@@ -125,7 +124,6 @@ label {
 .inputs div {
     gap: 0.5rem;
 }
-
 
 
 
@@ -384,7 +382,7 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: stretch;
+    align-items: center;
     gap: 2rem;
     height: 40rem;
 }
@@ -437,18 +435,19 @@ span#game-object {
 
 
 @media only screen and (max-width: 768px) {
+    /**** LANDING SCREEN PROPERTIES ****/
+    .main-screen, #start-window, #select-mode, #enter-name-mode {
+        gap: 2rem;
+    }
+
     #select-mode button {
         width: 9rem;
     }
 
-    .btn-lg {
-        border-width: 0.5rem;
-        padding: 0.5rem 1.5rem;
-        font-size: 0.75rem;
-    }
 
-    .main-screen, #start-window, #select-mode {
-        gap: 2rem;
+    /**** GAMEPLAY SCREEN PROPERTIES ****/
+    main {
+        padding: 2rem;
     }
 
     .ttt-grid {
@@ -460,26 +459,64 @@ span#game-object {
         height: fit-content;
     }
 
-    #modal-exit .box {
-        margin: 2rem;
-    }
-
     .cell img {
         width: 4rem;
     }
 
-    main {
-        padding: 2rem;
+
+    /**** MODAL EXIT PROPERTIES ****/
+    #modal-exit .box {
+        margin: 2rem;
+    }
+
+
+    /**** BUTTON PROPERTIES ****/
+    .btn-lg {
+        border-width: 0.5rem;
+        padding: 0.5rem 1.5rem;
+        font-size: 0.75rem;
     }
 }
 
 
 
 @media only screen and (max-width: 425px) {
+    /**** LANDING SCREEN PROPERTIES ****/
     #start-window img {
         width: 12rem;
     }
 
+    #select-mode div {
+        flex-direction: column;
+    }
+
+    #select-mode button {
+        width: auto;
+    }
+
+
+    /**** GAMEPLAY SCREEN PROPERTIES ****/
+    .ttt-grid {
+        width: 14rem;
+        height: 14rem;
+    }
+
+
+    /**** MODAL EXIT PROPERTIES ****/
+    .modal-exit-content {
+        align-items: normal;
+    }
+
+    .modal-exit-content div {
+        flex-direction: column;
+    }
+
+    .modal-exit-content button {
+        width: auto;
+    }
+
+
+    /**** MODAL INFO PROPERTIES ****/
     #modal-info-padding {
         padding: 0.5rem;
     }
@@ -492,39 +529,12 @@ span#game-object {
         line-height: 1.25rem;
     }
 
-    #select-mode div {
-        flex-direction: column;
-    }
 
-    #select-mode button {
-        width: auto;
-    }
-
-    .ttt-grid {
-        width: 14rem;
-        height: 14rem;
-    }
-
+    /**** BOX PROPERTIES ****/
     .box {
         padding: 1.75rem;
     }
 
-    .modal-exit-content {
-        align-items: normal;
-    }
-
-    .modal-exit-content div {
-        flex-direction: column;
-    }
-
-    .modal-exit-content button {
-        width: auto;
-    }
-}
-
-
-
-@media only screen and (max-width: 325px) {
     header {
         flex-direction: column;
         align-items: center;
