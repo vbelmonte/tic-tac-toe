@@ -1,4 +1,4 @@
-function runProgram() {
+(function runProgram() {
 
     let __currentMove = null;
     let __gridArray = document.getElementsByClassName("cell");
@@ -26,25 +26,12 @@ function runProgram() {
         function __showHeaderButtons() {
             document.getElementById("header-buttons").style.display = "flex";
         }
-        
-        function start() {
-            document.getElementById("start-window").style.display = "none";
-            document.getElementById("select-mode").style.display = "flex";
-        }
-    
-        function startTwoPlayers() {
-            /*document.getElementById("select-mode").style.display = "none";*/
-            document.getElementById("enter-name-mode").style.display = "none";
-            document.getElementsByClassName("landing-screen")[0].style.display = "none";
-            document.getElementsByClassName("main-screen")[0].style.display = "flex";
 
-            __assignPlayerNames();
-            __initializeGame();
-        }
-
-        function toggleNamesWindow() {
-            document.getElementById("select-mode").style.display = "none";
-            document.getElementById("enter-name-mode").style.display = "flex";
+        function __addExitButtons() {
+            return `<div id="gameover-btns">
+            <button class="btn-sm btn-green" id="restart">Restart</button>
+            <button class="btn-sm btn-red exit-btn">Exit</button>
+            </div>`;
         }
 
         function __assignPlayerNames() {
@@ -73,6 +60,66 @@ function runProgram() {
         function __clearNameInputEntries() {
             document.getElementById("player-1").value = "";
             document.getElementById("player-2").value = "";
+        }
+
+        function __initializeGame() {
+            __clearGrid();
+            gamePlay.determineWhoGoesFirst();
+            __setUpGrid();
+            __showHeaderButtons();
+        }
+
+        function __setUpGrid() {
+            for (let i = 0; i < __gridArray.length; i++) {
+                __addCellEventListener(__gridArray[i]);
+            }
+        }
+
+        function __clearGrid() {
+            for (let i = 0; i < __gridArray.length; i++) {
+                __gridArray[i].innerHTML = "";
+                __gridArray[i].classList.remove("x");
+                __gridArray[i].classList.remove("o");
+                __gridArray[i].classList.remove("end");
+                __gridArray[i].style.backgroundColor = "var(--cornsilk)";
+            }
+        }
+
+        function __disableGrid() {
+            for (let i = 0; i < __gridArray.length; i++) {
+                __gridArray[i].classList.add("end");
+            }
+        }
+
+        function __addCellEventListener(cell) { 
+            cell.addEventListener("click", function() {
+                if (__currentMove === 1) {
+                    playerOne.addX(cell);
+                }
+                else if (__currentMove === 0) {
+                    playerTwo.addO(cell);
+                }
+            });
+        }
+        
+        function start() {
+            document.getElementById("start-window").style.display = "none";
+            document.getElementById("select-mode").style.display = "flex";
+        }
+    
+        function startTwoPlayers() {
+            /*document.getElementById("select-mode").style.display = "none";*/
+            document.getElementById("enter-name-mode").style.display = "none";
+            document.getElementsByClassName("landing-screen")[0].style.display = "none";
+            document.getElementsByClassName("main-screen")[0].style.display = "flex";
+
+            __assignPlayerNames();
+            __initializeGame();
+        }
+
+        function toggleNamesWindow() {
+            document.getElementById("select-mode").style.display = "none";
+            document.getElementById("enter-name-mode").style.display = "flex";
         }
 
         function toggleInfoModal() {
@@ -109,38 +156,17 @@ function runProgram() {
             __initializeGame();
         }
 
+        function endGame() {
+            __disableGrid();
+            __hideHeaderButtons();
+        }
+
         function highlightBackground() {
             document.getElementsByTagName("body")[0].style.backgroundColor = "var(--green)";
         }
 
         function restoreBackground() {
             document.getElementsByTagName("body")[0].style.backgroundColor = "var(--light-yellow)";
-        }
-
-        function __initializeGame() {
-            __clearGrid();
-            gamePlay.determineWhoGoesFirst();
-            __setUpGrid();
-            __showHeaderButtons();
-        }
-
-        function endGame() {
-            __disableGrid();
-            __hideHeaderButtons();
-        }
-
-        function __clearGrid() {
-            for (let i = 0; i < __gridArray.length; i++) {
-                __gridArray[i].innerHTML = "";
-                __gridArray[i].classList.remove("x");
-                __gridArray[i].classList.remove("o");
-                __gridArray[i].classList.remove("end");
-                __gridArray[i].style.backgroundColor = "var(--cornsilk)";
-            }
-        }
-
-        function updateMessageBox(message) {
-            document.getElementById("caption").innerHTML = message;
         }
 
         function turnMessage(player) {
@@ -163,37 +189,7 @@ function runProgram() {
             document.getElementsByClassName("exit-btn")[1].addEventListener("click", gameOperation.toggleExitModal);
         }
 
-        function __addCellEventListener(cell) { 
-            cell.addEventListener("click", function() {
-                if (__currentMove === 1) {
-                    playerOne.addX(cell);
-                }
-                else if (__currentMove === 0) {
-                    playerTwo.addO(cell);
-                }
-            });
-        }
-
-        function __disableGrid() {
-            for (let i = 0; i < __gridArray.length; i++) {
-                __gridArray[i].classList.add("end");
-            }
-        }
-
-        function __setUpGrid() {
-            for (let i = 0; i < __gridArray.length; i++) {
-                __addCellEventListener(__gridArray[i]);
-            }
-        }
-
-        function __addExitButtons() {
-            return `<div id="gameover-btns">
-            <button class="btn-sm btn-green" id="restart">Restart</button>
-            <button class="btn-sm btn-red exit-btn">Exit</button>
-            </div>`;
-        }
-
-        return {start, startTwoPlayers, toggleInfoModal, toggleExitModal, leaveGame, restartGame, updateMessageBox, goFirstMessage, turnMessage, winnerMessage, noWinnerMessage, endGame, highlightBackground, restoreBackground, toggleNamesWindow, playerOneName, playerTwoName};
+        return {start, startTwoPlayers, toggleNamesWindow, toggleInfoModal, toggleExitModal, leaveGame, restartGame, endGame, highlightBackground, restoreBackground, turnMessage, goFirstMessage, winnerMessage, noWinnerMessage, playerOneName, playerTwoName};
     }
 
     function gamePlayMechanics() {
@@ -203,34 +199,15 @@ function runProgram() {
             let number = Math.round(Math.random());
 
             if (number == 1) {
-                // Player 1 goes first
                 __currentMove = number;
                 gameOperation.goFirstMessage(playerOneName);
             }
             else {
-                // Player 2 goes first
                 __currentMove = number;
                 gameOperation.goFirstMessage(playerTwoName)
             }
-            console.log("currentMove: " + __currentMove);
         }
-
-        function __takeTurns() {
-            if (__currentMove === 1) {
-                gameOperation.turnMessage(playerTwoName);
-                __currentMove = 0;
-
-            }
-            else if (__currentMove === 0) {
-                gameOperation.turnMessage(playerOneName);
-                __currentMove = 1;
-            }
-        }
-
-        function __highlightWinnerSequence(cell) {
-            cell.style.backgroundColor = "var(--purple)";
-        }
-
+        
         function checkForWinner() {
             // run the winnerAlgorithms
             let xWinner = __winnerAlgorithms("x");
@@ -239,11 +216,9 @@ function runProgram() {
             // if winnerAlgorithm checks off, there is a winner and we end the game
             if (xWinner === true || oWinner === true) {
                 if (xWinner === true) {
-                    console.log("Player 1 wins!");
                     gameOperation.winnerMessage(playerOneName);
                 }
                 else {
-                    console.log("Player 2 wins!");
                     gameOperation.winnerMessage(playerTwoName);
                 }
                 gameOperation.endGame();
@@ -261,84 +236,6 @@ function runProgram() {
             }
         }
 
-        function __winnerAlgorithms(player) {
-            // if gridArray pattern 1 exists, winner   
-            if (__gridArray[0].classList.contains(player) && __gridArray[1].classList.contains(player) && __gridArray[2].classList.contains(player)) {
-                // end game, declare player winner
-                __highlightWinnerSequence(__gridArray[0]);
-                __highlightWinnerSequence(__gridArray[1]);
-                __highlightWinnerSequence(__gridArray[2]);
-                return true;
-            }
-
-            // else if gridArray pattern 2 exists, winner
-            else if (__gridArray[3].classList.contains(player) && __gridArray[4].classList.contains(player) && __gridArray[5].classList.contains(player)) {
-                // end game, declare player winner
-                __highlightWinnerSequence(__gridArray[3]);
-                __highlightWinnerSequence(__gridArray[4]);
-                __highlightWinnerSequence(__gridArray[5]);
-                return true;
-            }
-
-            // else if gridArray pattern 3 exists, winner
-            else if (__gridArray[6].classList.contains(player) && __gridArray[7].classList.contains(player) && __gridArray[8].classList.contains(player)) {
-                // end game, declare player winner
-                __highlightWinnerSequence(__gridArray[6]);
-                __highlightWinnerSequence(__gridArray[7]);
-                __highlightWinnerSequence(__gridArray[8]);
-                return true;
-            }
-
-            // else if gridArray pattern 4 exists, winner
-            else if (__gridArray[0].classList.contains(player) && __gridArray[4].classList.contains(player) && __gridArray[8].classList.contains(player)) {
-                // end game, declare player winner
-                __highlightWinnerSequence(__gridArray[0]);
-                __highlightWinnerSequence(__gridArray[4]);
-                __highlightWinnerSequence(__gridArray[8]);
-                return true;
-            }
-
-            // else if gridArray pattern 5 exists, winner
-            else if (__gridArray[2].classList.contains(player) && __gridArray[4].classList.contains(player) && __gridArray[6].classList.contains(player)) {
-                // end game, declare player winner
-                __highlightWinnerSequence(__gridArray[2]);
-                __highlightWinnerSequence(__gridArray[4]);
-                __highlightWinnerSequence(__gridArray[6]);
-                return true;
-            }
-
-            // else if gridArray pattern 6 exists, winner
-            else if (__gridArray[0].classList.contains(player) && __gridArray[3].classList.contains(player) && __gridArray[6].classList.contains(player)) {
-                // end game, declare player winner
-                __highlightWinnerSequence(__gridArray[0]);
-                __highlightWinnerSequence(__gridArray[3]);
-                __highlightWinnerSequence(__gridArray[6]);
-                return true;
-            }
-
-            // else if gridArray pattern 7 exists, winner
-            else if (__gridArray[1].classList.contains(player) && __gridArray[4].classList.contains(player) && __gridArray[7].classList.contains(player)) {
-                // end game, declare player winner
-                __highlightWinnerSequence(__gridArray[1]);
-                __highlightWinnerSequence(__gridArray[4]);
-                __highlightWinnerSequence(__gridArray[7]);
-                return true;
-            }
-
-            // else if gridArray pattern 8 exists, winner
-            else if (__gridArray[2].classList.contains(player) && __gridArray[5].classList.contains(player) && __gridArray[8].classList.contains(player)) {
-                // end game, declare player winner
-                __highlightWinnerSequence(__gridArray[2]);
-                __highlightWinnerSequence(__gridArray[5]);
-                __highlightWinnerSequence(__gridArray[8]);
-                return true;
-            }
-
-            else {
-                return false;
-            }
-        }
-
         function __checkFullGrid() {
             let fullGridFlag = true;
 
@@ -349,6 +246,84 @@ function runProgram() {
                 }
             }
             return fullGridFlag;
+        }
+
+        function __highlightWinnerSequence(cell) {
+            cell.style.backgroundColor = "var(--purple)";
+        }
+
+        function __takeTurns() {
+            if (__currentMove === 1) {
+                gameOperation.turnMessage(playerTwoName);
+                __currentMove = 0;
+
+            }
+            else if (__currentMove === 0) {
+                gameOperation.turnMessage(playerOneName);
+                __currentMove = 1;
+            }
+        }
+
+        function __winnerAlgorithms(player) {
+            if (__gridArray[0].classList.contains(player) && __gridArray[1].classList.contains(player) && __gridArray[2].classList.contains(player)) {
+                __highlightWinnerSequence(__gridArray[0]);
+                __highlightWinnerSequence(__gridArray[1]);
+                __highlightWinnerSequence(__gridArray[2]);
+                return true;
+            }
+
+            else if (__gridArray[3].classList.contains(player) && __gridArray[4].classList.contains(player) && __gridArray[5].classList.contains(player)) {
+                __highlightWinnerSequence(__gridArray[3]);
+                __highlightWinnerSequence(__gridArray[4]);
+                __highlightWinnerSequence(__gridArray[5]);
+                return true;
+            }
+
+            else if (__gridArray[6].classList.contains(player) && __gridArray[7].classList.contains(player) && __gridArray[8].classList.contains(player)) {
+                __highlightWinnerSequence(__gridArray[6]);
+                __highlightWinnerSequence(__gridArray[7]);
+                __highlightWinnerSequence(__gridArray[8]);
+                return true;
+            }
+
+            else if (__gridArray[0].classList.contains(player) && __gridArray[4].classList.contains(player) && __gridArray[8].classList.contains(player)) {
+                __highlightWinnerSequence(__gridArray[0]);
+                __highlightWinnerSequence(__gridArray[4]);
+                __highlightWinnerSequence(__gridArray[8]);
+                return true;
+            }
+
+            else if (__gridArray[2].classList.contains(player) && __gridArray[4].classList.contains(player) && __gridArray[6].classList.contains(player)) {
+                __highlightWinnerSequence(__gridArray[2]);
+                __highlightWinnerSequence(__gridArray[4]);
+                __highlightWinnerSequence(__gridArray[6]);
+                return true;
+            }
+
+            else if (__gridArray[0].classList.contains(player) && __gridArray[3].classList.contains(player) && __gridArray[6].classList.contains(player)) {
+                __highlightWinnerSequence(__gridArray[0]);
+                __highlightWinnerSequence(__gridArray[3]);
+                __highlightWinnerSequence(__gridArray[6]);
+                return true;
+            }
+
+            else if (__gridArray[1].classList.contains(player) && __gridArray[4].classList.contains(player) && __gridArray[7].classList.contains(player)) {
+                __highlightWinnerSequence(__gridArray[1]);
+                __highlightWinnerSequence(__gridArray[4]);
+                __highlightWinnerSequence(__gridArray[7]);
+                return true;
+            }
+
+            else if (__gridArray[2].classList.contains(player) && __gridArray[5].classList.contains(player) && __gridArray[8].classList.contains(player)) {
+                __highlightWinnerSequence(__gridArray[2]);
+                __highlightWinnerSequence(__gridArray[5]);
+                __highlightWinnerSequence(__gridArray[8]);
+                return true;
+            }
+
+            else {
+                return false;
+            }
         }
 
         return {determineWhoGoesFirst, checkForWinner};
@@ -384,19 +359,19 @@ function runProgram() {
     const playerTwo = playerTwoMechanics();
 
 
-    document.getElementById("start").addEventListener("click", gameOperation.start);
-    document.getElementById("two-players").addEventListener("click", gameOperation.toggleNamesWindow);
-    document.getElementById("play-two-players").addEventListener("click", gameOperation.startTwoPlayers);
-    document.getElementById("info").addEventListener("click", gameOperation.toggleInfoModal);
-    document.getElementsByClassName("btn-x")[0].addEventListener("click", gameOperation.toggleInfoModal);
-    document.getElementsByClassName("exit-btn")[0].addEventListener("click", gameOperation.toggleExitModal);
-    document.getElementsByClassName("exit-btn")[1].addEventListener("click", gameOperation.toggleExitModal);
-    document.getElementsByClassName("exit-btns")[0].addEventListener("click", gameOperation.leaveGame);
-    document.getElementsByClassName("exit-btns")[1].addEventListener("click", gameOperation.toggleExitModal);
-    document.getElementsByClassName("restart-btn")[0].addEventListener("click", gameOperation.restartGame);
-    document.getElementsByClassName("restart-btn")[0].addEventListener("mousedown", gameOperation.highlightBackground);
-    document.getElementsByClassName("restart-btn")[0].addEventListener("mouseup", gameOperation.restoreBackground);
-    document.getElementById("restart").addEventListener("click", gameOperation.restartGame);
-}
-
-runProgram();
+    (function assignEventListeners() {
+        document.getElementById("start").addEventListener("click", gameOperation.start);
+        document.getElementById("two-players").addEventListener("click", gameOperation.toggleNamesWindow);
+        document.getElementById("play-two-players").addEventListener("click", gameOperation.startTwoPlayers);
+        document.getElementsByClassName("btn-info")[0].addEventListener("click", gameOperation.toggleInfoModal);
+        document.getElementsByClassName("btn-x")[0].addEventListener("click", gameOperation.toggleInfoModal);
+        document.getElementsByClassName("exit-btn")[0].addEventListener("click", gameOperation.toggleExitModal);
+        document.getElementsByClassName("exit-btn")[1].addEventListener("click", gameOperation.toggleExitModal);
+        document.getElementsByClassName("exit-btns")[0].addEventListener("click", gameOperation.leaveGame);
+        document.getElementsByClassName("exit-btns")[1].addEventListener("click", gameOperation.toggleExitModal);
+        document.getElementsByClassName("restart-btn")[0].addEventListener("click", gameOperation.restartGame);
+        document.getElementsByClassName("restart-btn")[0].addEventListener("mousedown", gameOperation.highlightBackground);
+        document.getElementsByClassName("restart-btn")[0].addEventListener("mouseup", gameOperation.restoreBackground);
+        document.getElementById("restart").addEventListener("click", gameOperation.restartGame);
+    })();
+})();
