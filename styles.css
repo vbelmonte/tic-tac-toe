@@ -7,6 +7,7 @@
     --green: #57941A;
     --baby-blue: #51B4D3;
     --sky-blue: #3978B1;
+    --purple: #8a2be2;
     --pink: #FA9494;
     --gold: #8B5F00;
     --white: #FFFFFF;
@@ -357,7 +358,7 @@ main {
 }
 
 .cell:hover {
-    background-color: var(--yellow);
+    background-color: var(--yellow) !important;
 }
 
 .game-message {
