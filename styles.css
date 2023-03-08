@@ -99,13 +99,13 @@ input {
     box-sizing: border-box;
 }
 
-form {
+.form {
     display: flex;
     flex-direction: column;
     gap: 4rem;
 }
 
-form button {
+.form button {
     width: 100%;
 }
 
