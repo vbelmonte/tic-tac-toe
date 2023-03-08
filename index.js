@@ -387,7 +387,7 @@ function runProgram() {
     document.getElementById("start").addEventListener("click", gameOperation.start);
     document.getElementById("two-players").addEventListener("click", gameOperation.toggleNamesWindow);
     document.getElementById("play-two-players").addEventListener("click", gameOperation.startTwoPlayers);
-    document.getElementById("info").addEventListener("click", gameOperation.toggleInfoModal);
+    document.getElementsByClassName("btn-info")[0].addEventListener("click", gameOperation.toggleInfoModal);
     document.getElementsByClassName("btn-x")[0].addEventListener("click", gameOperation.toggleInfoModal);
     document.getElementsByClassName("exit-btn")[0].addEventListener("click", gameOperation.toggleExitModal);
     document.getElementsByClassName("exit-btn")[1].addEventListener("click", gameOperation.toggleExitModal);
