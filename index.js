@@ -88,6 +88,7 @@ function runProgram() {
                 __gridArray[i].classList.remove("x");
                 __gridArray[i].classList.remove("o");
                 __gridArray[i].classList.remove("end");
+                __gridArray[i].style.backgroundColor = "var(--cornsilk)";
             }
         }
 
@@ -179,6 +180,10 @@ function runProgram() {
             }
         }
 
+        function __highlightWinnerSequence(cell) {
+            cell.style.backgroundColor = "var(--purple)";
+        }
+
         function checkForWinner() {
             // run the winnerAlgorithms
             let xWinner = __winnerAlgorithms("x");
@@ -213,48 +218,72 @@ function runProgram() {
             // if gridArray pattern 1 exists, winner   
             if (__gridArray[0].classList.contains(player) && __gridArray[1].classList.contains(player) && __gridArray[2].classList.contains(player)) {
                 // end game, declare player winner
+                __highlightWinnerSequence(__gridArray[0]);
+                __highlightWinnerSequence(__gridArray[1]);
+                __highlightWinnerSequence(__gridArray[2]);
                 return true;
             }
 
             // else if gridArray pattern 2 exists, winner
             else if (__gridArray[3].classList.contains(player) && __gridArray[4].classList.contains(player) && __gridArray[5].classList.contains(player)) {
                 // end game, declare player winner
+                __highlightWinnerSequence(__gridArray[3]);
+                __highlightWinnerSequence(__gridArray[4]);
+                __highlightWinnerSequence(__gridArray[5]);
                 return true;
             }
 
             // else if gridArray pattern 3 exists, winner
             else if (__gridArray[6].classList.contains(player) && __gridArray[7].classList.contains(player) && __gridArray[8].classList.contains(player)) {
                 // end game, declare player winner
+                __highlightWinnerSequence(__gridArray[6]);
+                __highlightWinnerSequence(__gridArray[7]);
+                __highlightWinnerSequence(__gridArray[8]);
                 return true;
             }
 
             // else if gridArray pattern 4 exists, winner
             else if (__gridArray[0].classList.contains(player) && __gridArray[4].classList.contains(player) && __gridArray[8].classList.contains(player)) {
                 // end game, declare player winner
+                __highlightWinnerSequence(__gridArray[0]);
+                __highlightWinnerSequence(__gridArray[4]);
+                __highlightWinnerSequence(__gridArray[8]);
                 return true;
             }
 
             // else if gridArray pattern 5 exists, winner
             else if (__gridArray[2].classList.contains(player) && __gridArray[4].classList.contains(player) && __gridArray[6].classList.contains(player)) {
                 // end game, declare player winner
+                __highlightWinnerSequence(__gridArray[2]);
+                __highlightWinnerSequence(__gridArray[4]);
+                __highlightWinnerSequence(__gridArray[6]);
                 return true;
             }
 
             // else if gridArray pattern 6 exists, winner
             else if (__gridArray[0].classList.contains(player) && __gridArray[3].classList.contains(player) && __gridArray[6].classList.contains(player)) {
                 // end game, declare player winner
+                __highlightWinnerSequence(__gridArray[0]);
+                __highlightWinnerSequence(__gridArray[3]);
+                __highlightWinnerSequence(__gridArray[6]);
                 return true;
             }
 
             // else if gridArray pattern 7 exists, winner
             else if (__gridArray[1].classList.contains(player) && __gridArray[4].classList.contains(player) && __gridArray[7].classList.contains(player)) {
                 // end game, declare player winner
+                __highlightWinnerSequence(__gridArray[1]);
+                __highlightWinnerSequence(__gridArray[4]);
+                __highlightWinnerSequence(__gridArray[7]);
                 return true;
             }
 
             // else if gridArray pattern 8 exists, winner
             else if (__gridArray[2].classList.contains(player) && __gridArray[5].classList.contains(player) && __gridArray[8].classList.contains(player)) {
                 // end game, declare player winner
+                __highlightWinnerSequence(__gridArray[2]);
+                __highlightWinnerSequence(__gridArray[5]);
+                __highlightWinnerSequence(__gridArray[8]);
                 return true;
             }
 

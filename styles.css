@@ -7,9 +7,12 @@
     --green: #57941A;
     --baby-blue: #51B4D3;
     --sky-blue: #3978B1;
+    --purple: #8a2be2;
     --pink: #FA9494;
     --gold: #8B5F00;
     --white: #FFFFFF;
+    --gray: #9b9b9b;
+    --darkgray: #585858;
     --black: #000000;
 }
 
@@ -18,7 +21,7 @@ body {
     font-family: "Roboto", "Arial", sans-serif;
     font-size: 16px;
     font-weight: 700;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
 }
 
@@ -36,6 +39,12 @@ body {
     background-color: rgba(0,0,0,0.4);
 }
 
+#container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 
 
 /**** LANDING SCREEN PROPERTIES ****/
@@ -43,7 +52,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    flex-grow: 1;
+    padding: 2rem;
 }
 
 .main-screen, #start-window, #select-mode {
@@ -52,10 +62,11 @@ body {
 }
 
 .main-screen {
-    height: 100vh;
+    flex: 1;
 }
 
-.main-screen, #start-window, #select-mode {
+#start-window, #select-mode {
+    text-align: center;
     gap: 4rem;
 }
 
@@ -97,10 +108,8 @@ header {
 }
 
 #info {
-    position: absolute;
-    width: 3rem;
-    right: 2rem;
-    bottom: 2rem;
+    /*width: 3rem;*/
+    padding: 1rem;
 }
 
 
@@ -150,6 +159,14 @@ button:active {
     transform: translateX(-0.2rem) translateY(0.2rem);
 }
 
+button:disabled {
+    pointer-events: none;
+    background-color: var(--gray);
+    border-color: var(--darkgray);
+    box-shadow: -0.4rem 0.4rem var(--gray);
+    
+}
+
 .btn-lg {
     border-width: 0.5rem;
     padding: 1rem 3rem;
@@ -194,8 +211,12 @@ button:active {
 }
 
 .btn-info {
+    display: block;
+    width: 3rem;
+    height: 3rem;
     fill: var(--yellow);
     filter: drop-shadow(-0.25rem 0.25rem rgb(57 120 177 / 100%));
+    float: right;
 }
 
 .btn-info:hover {
@@ -252,6 +273,7 @@ h3 {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+    text-align: center;
 }
 
 .modal-exit-content div {
@@ -312,7 +334,7 @@ main {
     display: flex;
     justify-content: center;
     flex: 1;
-    padding: 5rem;
+    padding: 4rem;
 }
 
 .game-area {
@@ -346,7 +368,7 @@ main {
 }
 
 .cell:hover {
-    background-color: var(--yellow);
+    background-color: var(--yellow) !important;
 }
 
 .game-message {
@@ -367,4 +389,102 @@ main {
 span#game-object {
     font-weight: 900;
     text-transform: uppercase;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+    #select-mode button {
+        width: 9rem;
+    }
+
+    .btn-lg {
+        border-width: 0.5rem;
+        padding: 0.5rem 1.5rem;
+        font-size: 0.75rem;
+    }
+
+    .main-screen, #start-window, #select-mode {
+        gap: 2rem;
+    }
+
+    .ttt-grid {
+        width: 16rem;
+        height: 16rem;
+    }
+
+    .game-area {
+        height: fit-content;
+    }
+
+    #modal-exit .box {
+        margin: 2rem;
+    }
+
+    .cell img {
+        width: 4rem;
+    }
+
+    main {
+        padding: 2rem;
+    }
+}
+
+
+
+@media only screen and (max-width: 425px) {
+    #start-window img {
+        width: 12rem;
+    }
+
+    #modal-info-padding {
+        padding: 0.5rem;
+    }
+
+    .modal-info-content {
+        width: auto;
+    }
+
+    .modal-info-content p {
+        line-height: 1.25rem;
+    }
+
+    #select-mode div {
+        flex-direction: column;
+    }
+
+    #select-mode button {
+        width: auto;
+    }
+
+    .ttt-grid {
+        width: 14rem;
+        height: 14rem;
+    }
+
+    .box {
+        padding: 1.75rem;
+    }
+
+    .modal-exit-content {
+        align-items: normal;
+    }
+
+    .modal-exit-content div {
+        flex-direction: column;
+    }
+
+    .modal-exit-content button {
+        width: auto;
+    }
+}
+
+
+
+@media only screen and (max-width: 325px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+    }
 }
