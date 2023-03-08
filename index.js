@@ -70,6 +70,14 @@ function runProgram() {
             __initializeGame();
         }
 
+        function highlightBackground() {
+            document.getElementsByTagName("body")[0].style.backgroundColor = "var(--green)";
+        }
+
+        function restoreBackground() {
+            document.getElementsByTagName("body")[0].style.backgroundColor = "var(--light-yellow)";
+        }
+
         function __initializeGame() {
             __clearGrid();
             gamePlay.determineWhoGoesFirst();
@@ -146,7 +154,7 @@ function runProgram() {
             </div>`;
         }
 
-        return {start, startTwoPlayers, toggleInfoModal, toggleExitModal, leaveGame, restartGame, updateMessageBox, goFirstMessage, turnMessage, winnerMessage, noWinnerMessage, endGame};
+        return {start, startTwoPlayers, toggleInfoModal, toggleExitModal, leaveGame, restartGame, updateMessageBox, goFirstMessage, turnMessage, winnerMessage, noWinnerMessage, endGame, highlightBackground, restoreBackground};
     }
 
     function gamePlayMechanics() {
@@ -345,6 +353,9 @@ function runProgram() {
     document.getElementsByClassName("exit-btn")[1].addEventListener("click", gameOperation.toggleExitModal);
     document.getElementsByClassName("exit-btns")[0].addEventListener("click", gameOperation.leaveGame);
     document.getElementsByClassName("exit-btns")[1].addEventListener("click", gameOperation.toggleExitModal);
+    document.getElementsByClassName("restart-btn")[0].addEventListener("click", gameOperation.restartGame);
+    document.getElementsByClassName("restart-btn")[0].addEventListener("mousedown", gameOperation.highlightBackground);
+    document.getElementsByClassName("restart-btn")[0].addEventListener("mouseup", gameOperation.restoreBackground);
     document.getElementById("restart").addEventListener("click", gameOperation.restartGame);
 }
 
