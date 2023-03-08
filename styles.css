@@ -468,3 +468,13 @@ span#game-object {
         width: auto;
     }
 }
+
+
+
+@media only screen and (max-width: 325px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+    }
+}
