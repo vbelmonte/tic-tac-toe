@@ -2,6 +2,8 @@ function runProgram() {
 
     let __currentMove = null;
     let __gridArray = document.getElementsByClassName("cell");
+    let playerOneName = null;
+    let playerTwoName = null;
 
     function backEndGameMechanics() {
 
@@ -31,11 +33,46 @@ function runProgram() {
         }
     
         function startTwoPlayers() {
-            document.getElementById("select-mode").style.display = "none";
+            /*document.getElementById("select-mode").style.display = "none";*/
+            document.getElementById("enter-name-mode").style.display = "none";
             document.getElementsByClassName("landing-screen")[0].style.display = "none";
             document.getElementsByClassName("main-screen")[0].style.display = "flex";
 
+            __assignPlayerNames();
             __initializeGame();
+        }
+
+        function toggleNamesWindow() {
+            document.getElementById("select-mode").style.display = "none";
+            document.getElementById("enter-name-mode").style.display = "flex";
+        }
+
+        function __assignPlayerNames() {
+            let player1 = document.getElementById("player-1");
+            let player2 = document.getElementById("player-2");
+
+            if (player1.value === "") {
+                playerOneName = "Player 1";
+            }
+            else {
+                playerOneName = player1.value;
+            }
+            if (player2.value === "") {
+                playerTwoName = "Player 2";
+            }
+            else {
+                playerTwoName = player2.value;
+            }
+        }
+
+        function __clearPlayerNames() {
+            playerOneName = null;
+            playerTwoName = null;
+        }
+
+        function __clearNameInputEntries() {
+            document.getElementById("player-1").value = "";
+            document.getElementById("player-2").value = "";
         }
 
         function toggleInfoModal() {
@@ -63,11 +100,21 @@ function runProgram() {
         function leaveGame() {
             toggleExitModal();
             __leaveGameScreen();
+            __clearPlayerNames();
+            __clearNameInputEntries();
             __openLandingScreen();
         }
     
         function restartGame() {
             __initializeGame();
+        }
+
+        function highlightBackground() {
+            document.getElementsByTagName("body")[0].style.backgroundColor = "var(--green)";
+        }
+
+        function restoreBackground() {
+            document.getElementsByTagName("body")[0].style.backgroundColor = "var(--light-yellow)";
         }
 
         function __initializeGame() {
@@ -146,7 +193,7 @@ function runProgram() {
             </div>`;
         }
 
-        return {start, startTwoPlayers, toggleInfoModal, toggleExitModal, leaveGame, restartGame, updateMessageBox, goFirstMessage, turnMessage, winnerMessage, noWinnerMessage, endGame};
+        return {start, startTwoPlayers, toggleInfoModal, toggleExitModal, leaveGame, restartGame, updateMessageBox, goFirstMessage, turnMessage, winnerMessage, noWinnerMessage, endGame, highlightBackground, restoreBackground, toggleNamesWindow, playerOneName, playerTwoName};
     }
 
     function gamePlayMechanics() {
@@ -158,24 +205,24 @@ function runProgram() {
             if (number == 1) {
                 // Player 1 goes first
                 __currentMove = number;
-                gameOperation.goFirstMessage("Player 1");
+                gameOperation.goFirstMessage(playerOneName);
             }
             else {
                 // Player 2 goes first
                 __currentMove = number;
-                gameOperation.goFirstMessage("Player 2");
+                gameOperation.goFirstMessage(playerTwoName)
             }
             console.log("currentMove: " + __currentMove);
         }
 
         function __takeTurns() {
             if (__currentMove === 1) {
-                gameOperation.turnMessage("Player 2");
+                gameOperation.turnMessage(playerTwoName);
                 __currentMove = 0;
 
             }
             else if (__currentMove === 0) {
-                gameOperation.turnMessage("Player 1");
+                gameOperation.turnMessage(playerOneName);
                 __currentMove = 1;
             }
         }
@@ -193,11 +240,11 @@ function runProgram() {
             if (xWinner === true || oWinner === true) {
                 if (xWinner === true) {
                     console.log("Player 1 wins!");
-                    gameOperation.winnerMessage("Player 1");
+                    gameOperation.winnerMessage(playerOneName);
                 }
                 else {
                     console.log("Player 2 wins!");
-                    gameOperation.winnerMessage("Player 2");
+                    gameOperation.winnerMessage(playerTwoName);
                 }
                 gameOperation.endGame();
             }
@@ -338,13 +385,17 @@ function runProgram() {
 
 
     document.getElementById("start").addEventListener("click", gameOperation.start);
-    document.getElementById("two-players").addEventListener("click", gameOperation.startTwoPlayers);
+    document.getElementById("two-players").addEventListener("click", gameOperation.toggleNamesWindow);
+    document.getElementById("play-two-players").addEventListener("click", gameOperation.startTwoPlayers);
     document.getElementById("info").addEventListener("click", gameOperation.toggleInfoModal);
     document.getElementsByClassName("btn-x")[0].addEventListener("click", gameOperation.toggleInfoModal);
     document.getElementsByClassName("exit-btn")[0].addEventListener("click", gameOperation.toggleExitModal);
     document.getElementsByClassName("exit-btn")[1].addEventListener("click", gameOperation.toggleExitModal);
     document.getElementsByClassName("exit-btns")[0].addEventListener("click", gameOperation.leaveGame);
     document.getElementsByClassName("exit-btns")[1].addEventListener("click", gameOperation.toggleExitModal);
+    document.getElementsByClassName("restart-btn")[0].addEventListener("click", gameOperation.restartGame);
+    document.getElementsByClassName("restart-btn")[0].addEventListener("mousedown", gameOperation.highlightBackground);
+    document.getElementsByClassName("restart-btn")[0].addEventListener("mouseup", gameOperation.restoreBackground);
     document.getElementById("restart").addEventListener("click", gameOperation.restartGame);
 }
 
